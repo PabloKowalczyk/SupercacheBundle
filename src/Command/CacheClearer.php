@@ -1,9 +1,9 @@
 <?php
 
-namespace noFlash\SupercacheBundle\Command;
+namespace PabloK\SupercacheBundle\Command;
 
 
-use noFlash\SupercacheBundle\Cache\CacheManager;
+use PabloK\SupercacheBundle\Cache\CacheManager;
 use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 
 /**

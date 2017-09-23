@@ -1,18 +1,13 @@
 <?php
 
-namespace noFlash\SupercacheBundle\Filesystem;
+namespace PabloK\SupercacheBundle\Filesystem;
 
-
-use FilesystemIterator;
-use Iterator;
-use noFlash\SupercacheBundle\Exceptions\FilesystemException;
-use noFlash\SupercacheBundle\Exceptions\PathNotFoundException;
-use noFlash\SupercacheBundle\Exceptions\SecurityViolationException;
+use Assert\Assertion;
+use PabloK\SupercacheBundle\Exceptions\FilesystemException;
+use PabloK\SupercacheBundle\Exceptions\PathNotFoundException;
+use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
 use Psr\Log\LoggerInterface;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use RegexIterator;
-use SplFileInfo;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Handles all filesystem operations.
@@ -31,23 +26,36 @@ class Finder
      * @var LoggerInterface
      */
     private $logger;
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
 
     /**
      * @param string $cacheDir Patch to caching directory
-     * @param LoggerInterface $logger
      *
      * @throws FilesystemException Unknown or invalid cache directory specified. It may be a permission problem.
      */
-    public function __construct($cacheDir, LoggerInterface $logger)
-    {
+    public function __construct(
+        string $cacheDir,
+        Filesystem $filesystem,
+        LoggerInterface $logger = null
+    ) {
+        Assertion::notEmpty($cacheDir, "Supercache cache dir can't be empty.");
+
+        if (!$filesystem->exists($cacheDir)) {
+            $filesystem->mkdir($cacheDir);
+        }
+
         $realCacheDir = $this->unixRealpath($cacheDir);
 
         if (!$realCacheDir) {
-            throw new FilesystemException("Supercache data directory $cacheDir is invalid or inaccessible");
+            throw new FilesystemException("Supercache data directory {$cacheDir} is invalid or inaccessible");
         }
 
         $this->cacheDir = $realCacheDir;
         $this->logger = $logger;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -266,8 +274,10 @@ class Finder
         }
 
         if (file_put_contents($fullPath, $content) === false) {
-            $this->logger->error("Unable to write cache file $fullPath (requested write to $path)",
-                array('content' => $content));
+            $this->logError(
+                "Unable to write cache file $fullPath (requested write to $path)",
+                ["content" => $content]
+            );
 
             return false;
         }
@@ -277,14 +287,17 @@ class Finder
             $this->getAbsolutePathFromRelative($path);
 
             return true;
-
         } catch (\Exception $e) {
             @unlink($fullPath); //Remove bogus file
 
-            $this->logger->error("Cache file verification failed after write - file not found after writing to $fullPath (requested $path)");
+            $this->logError(
+                "Cache file verification failed after write - file not found after writing to $fullPath (requested $path)"
+            );
 
             if($e instanceof SecurityViolationException) {
-                $this->logger->error("Cache file verification failed after write - file not found after writing to $fullPath (requested $path)");
+                $this->logError(
+                    "Cache file verification failed after write - file not found after writing to $fullPath (requested $path)"
+                );
             }
 
             return false;
@@ -305,9 +318,18 @@ class Finder
             $this->getAbsolutePathFromRelative($path);
 
             return true;
-
         } catch(PathNotFoundException $e) {
             return false;
         }
+    }
+
+    private function logError(string $message, array $context = [])
+    {
+        if ($this->logger === null) {
+            return;
+        }
+
+        $this->logger
+            ->error($message, $context);
     }
 }

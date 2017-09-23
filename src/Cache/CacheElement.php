@@ -1,13 +1,9 @@
 <?php
 
-namespace noFlash\SupercacheBundle\Cache;
+namespace PabloK\SupercacheBundle\Cache;
 
+use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
 
-use noFlash\SupercacheBundle\Exceptions\SecurityViolationException;
-
-/**
- * Represent single cache entry.
- */
 class CacheElement
 {
     /** @deprecated Will be moved to CacheType */
@@ -41,10 +37,13 @@ class CacheElement
      *
      * @throws SecurityViolationException Specified cache path was found to be dangerous (eg. /../../sandbox)
      */
-    public function __construct($path, $content, $type = self::TYPE_BINARY)
-    {
+    public function __construct(
+        string $path,
+        string $content,
+        string $type = self::TYPE_BINARY
+    ) {
         $this->setPath($path);
-        $this->content = $content; //Since setter doesn't modify content skip calling it (performance!)
+        $this->updateContent($content);
         $this->setType($type);
     }
 
@@ -53,7 +52,7 @@ class CacheElement
      *
      * @param string $path Cache path, eg. /sandbox
      */
-    public function setPath($path)
+    private function setPath(string $path)
     {
         $this->path = urldecode($path);
     }
@@ -63,7 +62,7 @@ class CacheElement
      *
      * @param string $path Cache path, eg. /sandbox
      */
-    public function setRawPath($path)
+    private function setRawPath(string $path)
     {
         $this->path = $path;
     }
@@ -73,7 +72,7 @@ class CacheElement
      *
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -85,7 +84,7 @@ class CacheElement
      *
      * @throws \InvalidArgumentException
      */
-    public function setType($type)
+    private function setType(string $type): void
     {
         if ($type !== self::TYPE_HTML && $type !== self::TYPE_JAVASCRIPT && $type !== self::TYPE_BINARY) {
             throw new \InvalidArgumentException('Invalid type specified');
@@ -99,7 +98,7 @@ class CacheElement
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -109,7 +108,7 @@ class CacheElement
      *
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -119,8 +118,8 @@ class CacheElement
      *
      * @param string $content
      */
-    public function setContent($content)
+    public function updateContent(string $content): void
     {
-        $this->content = (string)$content;
+        $this->content = $content;
     }
 }

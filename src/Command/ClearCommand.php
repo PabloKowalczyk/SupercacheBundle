@@ -1,22 +1,15 @@
 <?php
 
-namespace noFlash\SupercacheBundle\Command;
-
+namespace PabloK\SupercacheBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class ClearCommand
- */
 class ClearCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        //@formatter:off
         $this
             ->setName('supercache:clear')
             ->setDescription('Clears all cache entries')
@@ -27,7 +20,6 @@ class ClearCommand extends ContainerAwareCommand
             //    'Perform a possibly unsafe clear - it removes all files and folders from cache directory without verifying whatever these files were created by that bundle.'
             //)
         ;
-        //@formatter:on
     }
 
     /**

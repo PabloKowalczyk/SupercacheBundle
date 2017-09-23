@@ -1,15 +1,12 @@
 <?php
 
-namespace noFlash\SupercacheBundle\Cache;
+namespace PabloK\SupercacheBundle\Cache;
 
-use noFlash\SupercacheBundle\Exceptions\SecurityViolationException;
+use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Class ResponseHandler
- */
 class ResponseHandler
 {
     /**
@@ -27,16 +24,23 @@ class ResponseHandler
      * @var CacheManager
      */
     private $cacheManager;
-
     /**
-     * @param CacheManager $cacheManager
-     * @param ContainerInterface $container
+     * @var string
      */
-    public function __construct(CacheManager $cacheManager, ContainerInterface $container)
-    {
+    private $environment;
+    /**
+     * @var bool
+     */
+    private $supercacheEnabled;
+
+    public function __construct(
+        CacheManager $cacheManager,
+        bool $addStatusHeader,
+        bool $supercacheEnabled
+    ) {
         $this->cacheManager = $cacheManager;
-        $this->container = $container;
-        $this->addStatusHeader = (bool)$this->container->getParameter('supercache.cache_status_header');
+        $this->addStatusHeader = $addStatusHeader;
+        $this->supercacheEnabled = $supercacheEnabled;
     }
 
     /**
@@ -106,6 +110,10 @@ class ResponseHandler
      */
     public function isCacheable(Request $request, Response $response)
     {
+        if (!$this->supercacheEnabled) {
+            return CacheManager::UNCACHEABLE_DISABLED;
+        }
+
         if ($request->attributes->get('_supercache') === false) {
             return CacheManager::UNCACHEABLE_ROUTE;
         }
@@ -130,11 +138,6 @@ class ResponseHandler
 
         if ($response->headers->hasCacheControlDirective('private')) {
             return CacheManager::UNCACHEABLE_PRIVATE;
-        }
-
-        $environment = $this->container->getParameter('kernel.environment');
-        if (($environment !== 'prod' && $environment !== 'dev') || !$this->container->getParameter('supercache.enable_' . $environment)) {
-            return CacheManager::UNCACHEABLE_ENVIRONMENT;
         }
 
         return true;

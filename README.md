@@ -1,3 +1,7 @@
+# Note
+This bundle is a fork of [SupercacheBundle](https://github.com/kiler129/SupercacheBundle) which 
+looks like [abandoned](https://github.com/kiler129/SupercacheBundle/issues/16).
+
 # Supercache Bundle
 Static pages caching for Symfony Framework.
 
@@ -12,7 +16,7 @@ Before you start using this bundle you should carefully read [HTTP Cache chapter
 
 Bundle can be installed like any other Symfony bundle.
   1. Open a command console, enter your project directory and execute following command:  
-  `composer require noflash/supercache-bundle`
+  `composer require pablok/supercache-bundle`
   2. Enable the bundle by adding following line to `app/AppKernel.php` file:
   ```php
   <?php
@@ -26,7 +30,7 @@ Bundle can be installed like any other Symfony bundle.
           $bundles = array(
               // ...
   
-              new noFlash\SupercacheBundle\SupercacheBundle(),
+              new PabloK\SupercacheBundle\SupercacheBundle(),
           );
   
           // ...
@@ -45,17 +49,13 @@ Default configuration:
 supercache:
 
     # Enable/disable cache while running prod environment
-    enable_prod:          true
-
-    # Enable/disable cache while running dev environment
-    enable_dev:           false
+    enabled:              true
 
     # Cache directory, must be http-accessible (so it cannot be located under app/)
-    cache_dir:            '%kernel.root_dir%/../webcache'
+    cache_dir:           '%kernel.root_dir%/../webcache'
 
     # Enable/disable adding X-Supercache header
-    cache_status_header:  true
-
+    cache_status_header: true
 ```
 
 ## Troubleshooting

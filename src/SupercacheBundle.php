@@ -1,12 +1,9 @@
 <?php
 
-namespace noFlash\SupercacheBundle;
+namespace PabloK\SupercacheBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * Class SupercacheBundle
- */
 class SupercacheBundle extends Bundle
 {
 }

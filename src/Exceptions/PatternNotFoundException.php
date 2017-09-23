@@ -1,6 +1,6 @@
 <?php
 
-namespace noFlash\SupercacheBundle\Exceptions;
+namespace PabloK\SupercacheBundle\Exceptions;
 
 
 /**

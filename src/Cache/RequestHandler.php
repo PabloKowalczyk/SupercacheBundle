@@ -1,16 +1,12 @@
 <?php
 
-namespace noFlash\SupercacheBundle\Cache;
+namespace PabloK\SupercacheBundle\Cache;
 
-use noFlash\SupercacheBundle\Exceptions\SecurityViolationException;
-use noFlash\SupercacheBundle\Http\CacheResponse;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
+use PabloK\SupercacheBundle\Http\CacheResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Class RequestHandler
- */
 class RequestHandler
 {
     /**
@@ -23,14 +19,10 @@ class RequestHandler
      */
     private $cacheManager;
 
-    /**
-     * @param CacheManager $cacheManager
-     * @param ContainerInterface $container
-     */
-    public function __construct(CacheManager $cacheManager, ContainerInterface $container)
+    public function __construct(CacheManager $cacheManager, bool $addStatusHeader)
     {
         $this->cacheManager = $cacheManager;
-        $this->addStatusHeader = (bool)$container->getParameter('supercache.cache_status_header');
+        $this->addStatusHeader = $addStatusHeader;
     }
 
     /**

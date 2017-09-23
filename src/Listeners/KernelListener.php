@@ -1,18 +1,12 @@
 <?php
 
-namespace noFlash\SupercacheBundle\Listeners;
+namespace PabloK\SupercacheBundle\Listeners;
 
-
-use noFlash\SupercacheBundle\Cache\RequestHandler;
-use noFlash\SupercacheBundle\Cache\ResponseHandler;
+use PabloK\SupercacheBundle\Cache\RequestHandler;
+use PabloK\SupercacheBundle\Cache\ResponseHandler;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
-/**
- * Listens for Symfony HttpKernel events
- *
- * @see {http://symfony.com/doc/current/components/http_kernel/introduction.html}
- */
 class KernelListener
 {
     /**
@@ -25,10 +19,6 @@ class KernelListener
      */
     private $responseHandler;
 
-    /**
-     * @param RequestHandler $requestHandler
-     * @param ResponseHandler $responseHandler
-     */
     public function __construct(RequestHandler $requestHandler, ResponseHandler $responseHandler)
     {
         $this->requestHandler = $requestHandler;
@@ -46,6 +36,7 @@ class KernelListener
     {
         $request = $event->getRequest();
         $cacheResponse = $this->requestHandler->retrieveCachedResponse($request);
+
         if ($cacheResponse !== null) {
             $request->attributes->set('response_source', 'cache');
             $event->setResponse($cacheResponse);

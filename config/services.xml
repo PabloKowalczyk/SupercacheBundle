@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="PabloK\SupercacheBundle\Filesystem\Finder">
+            <argument type="string">%supercache.cache_dir%</argument>
+            <argument type="service" id="Symfony\Component\Filesystem\Filesystem" />
+            <argument type="service" id="logger" on-invalid="null" />
+        </service>
+
+        <service id="PabloK\SupercacheBundle\Cache\CacheManager">
+            <argument type="service" id="PabloK\SupercacheBundle\Filesystem\Finder" />
+        </service>
+
+        <service id="PabloK\SupercacheBundle\Listeners\KernelListener">
+            <argument type="service" id="PabloK\SupercacheBundle\Cache\RequestHandler" />
+            <argument type="service" id="PabloK\SupercacheBundle\Cache\ResponseHandler" />
+
+            <tag name="kernel.event_listener" event="kernel.request" method="onRequest" priority="2147483647" />
+            <tag name="kernel.event_listener" event="kernel.response" method="onResponse" priority="-2147483647" />
+        </service>
+
+        <service id="PabloK\SupercacheBundle\Cache\RequestHandler">
+            <argument type="service" id="PabloK\SupercacheBundle\Cache\CacheManager" />
+            <argument type="string">%supercache.cache_status_header%</argument>
+        </service>
+
+        <service id="PabloK\SupercacheBundle\Cache\ResponseHandler">
+            <argument type="service" id="PabloK\SupercacheBundle\Cache\CacheManager" />
+            <argument type="string">%supercache.cache_status_header%</argument>
+            <argument type="string">%supercache.enabled%</argument>
+        </service>
+
+        <service id="PabloK\SupercacheBundle\Command\CacheClearer">
+            <argument type="service" id="PabloK\SupercacheBundle\Cache\CacheManager" />
+            <tag name="kernel.cache_clearer" />
+        </service>
+    </services>
+</container>

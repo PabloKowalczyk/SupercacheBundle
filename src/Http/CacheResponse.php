@@ -1,9 +1,9 @@
 <?php
 
-namespace noFlash\SupercacheBundle\Http;
+namespace PabloK\SupercacheBundle\Http;
 
 
-use noFlash\SupercacheBundle\Cache\CacheElement;
+use PabloK\SupercacheBundle\Cache\CacheElement;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 /**

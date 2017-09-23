@@ -1,37 +1,36 @@
 <?php
 
-namespace noFlash\SupercacheBundle\Cache;
+namespace PabloK\SupercacheBundle\Cache;
 
 
-use noFlash\SupercacheBundle\Exceptions\FilesystemException;
-use noFlash\SupercacheBundle\Exceptions\SecurityViolationException;
-use noFlash\SupercacheBundle\Filesystem\Finder;
+use PabloK\SupercacheBundle\Exceptions\FilesystemException;
+use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
+use PabloK\SupercacheBundle\Filesystem\Finder;
 
 /**
  * Performs cache-related operations on cached entries.
  */
 class CacheManager
 {
-
-    const UNCACHEABLE_ENVIRONMENT     = -7;
-    const UNCACHEABLE_PRIVATE         = -6;
+    const UNCACHEABLE_DISABLED = -7;
+    const UNCACHEABLE_PRIVATE = -6;
     const UNCACHEABLE_NO_STORE_POLICY = -5;
-    const UNCACHEABLE_QUERY           = -4;
-    const UNCACHEABLE_CODE            = -3;
-    const UNCACHEABLE_METHOD          = -2;
-    const UNCACHEABLE_ROUTE           = -1;
+    const UNCACHEABLE_QUERY = -4;
+    const UNCACHEABLE_CODE = -3;
+    const UNCACHEABLE_METHOD = -2;
+    const UNCACHEABLE_ROUTE = -1;
 
     /**
      * @var array Human readable values for UNCACHEABLE_* codes
      */
     private static $readableUncachableExplanation = array(
-        self::UNCACHEABLE_ENVIRONMENT => 'env',
         self::UNCACHEABLE_PRIVATE => 'private',
         self::UNCACHEABLE_NO_STORE_POLICY => 'no-store-policy',
         self::UNCACHEABLE_QUERY => 'query-string',
         self::UNCACHEABLE_CODE => 'code',
         self::UNCACHEABLE_METHOD => 'method',
-        self::UNCACHEABLE_ROUTE => 'route'
+        self::UNCACHEABLE_ROUTE => 'route',
+        self::UNCACHEABLE_DISABLED => "disabled"
     );
 
     /**
@@ -207,13 +206,12 @@ class CacheManager
             if ($content !== false) {
                 return new CacheElement($path, $content, CacheElement::TYPE_BINARY);
             }
-
         } else {
             $element = new CacheElement($path, '', $type); //This will also verify type
             $content = $this->finder->readFile($path . '/index.' . CacheElement::TYPE_BINARY);
 
             if ($content !== false) {
-                $element->setContent($content);
+                $element->updateContent($content);
             }
 
             return $element;
