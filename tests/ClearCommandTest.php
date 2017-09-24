@@ -16,7 +16,7 @@ class ClearCommandTest extends KernelTestCase
 
         $container = $kernel->getContainer();
 
-        $command = $container->get("console.command.pablok_supercachebundle_command_clearcommand");
+        $command = $container->get("supercache.command.clear_command");
 
         $commandTester = new CommandTester($command);
 
