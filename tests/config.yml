@@ -1,0 +1,9 @@
+parameters:
+    secret: ThisTokenIsNotSoSecretChangeIt
+
+framework:
+    secret: "%secret%"
+
+supercache:
+    enabled: true
+    cache_dir: "%kernel.cache_dir%/test-supercache"
