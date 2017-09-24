@@ -107,15 +107,15 @@ class Finder
     /**
      * Provides raw list of cache files.
      *
-     * @return Iterator|SplFileInfo[]
+     * @return \Iterator|\SplFileInfo[]
      *
      * @throw UnexpectedValueException Exception is thrown while cache directory cannot be opened or traversed.
      */
     public function getFilesList()
     {
-        $dir = new RecursiveDirectoryIterator($this->cacheDir, FilesystemIterator::CURRENT_AS_FILEINFO);
-        $ite = new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::CHILD_FIRST);
-        $files = new RegexIterator($ite, self::CACHE_FILE_REGEX);
+        $dir = new \RecursiveDirectoryIterator($this->cacheDir, \FilesystemIterator::CURRENT_AS_FILEINFO);
+        $ite = new \RecursiveIteratorIterator($dir, \RecursiveIteratorIterator::CHILD_FIRST);
+        $files = new \RegexIterator($ite, self::CACHE_FILE_REGEX);
 
         return $files;
     }
@@ -149,14 +149,11 @@ class Finder
     /**
      * Deletes cache file.
      *
-     * @param string $path
-     *
-     * @return bool
      * @throws PathNotFoundException
      * @throws SecurityViolationException Thrown while path is not located under cache directory
      * @throws \InvalidArgumentException Given path doesn't look like file created by this bundle
      */
-    public function deleteFile($path)
+    public function deleteFile(string $path): bool
     {
         $path = $this->getAbsolutePathFromRelative($path);
         if (!$path) {
@@ -173,13 +170,10 @@ class Finder
     /**
      * Deletes EMPTY directory.
      *
-     * @param string $path
-     *
-     * @return bool
      * @throws PathNotFoundException
      * @throws SecurityViolationException Thrown while path is not located under cache directory
      */
-    public function deleteDirectory($path)
+    public function deleteDirectory(string $path): bool
     {
         $path = $this->getAbsolutePathFromRelative($path);
 
@@ -189,29 +183,28 @@ class Finder
     /**
      * Deletes directory with it's content.
      *
-     *
-     * @param string $path
      * @param bool $safeDelete By default this option is enabled and prevents deleting files and folders not created by
      *     that bundle.
      *
-     * @return bool
      * @throws FilesystemException
      * @throws PathNotFoundException
      * @throws SecurityViolationException Thrown while path is not located under cache directory
      * @throws \RuntimeException Exception is used while unknown file is found and $safeDelete is enabled
      */
-    public function deleteDirectoryRecursive($path, $safeDelete = true)
+    public function deleteDirectoryRecursive(string $path, bool $safeDelete = true): bool
     {
         $path = $this->getAbsolutePathFromRelative($path);
         if (empty($path)) {
             return false;
         }
 
-        $dir = new RecursiveDirectoryIterator($path,
-            RecursiveDirectoryIterator::SKIP_DOTS | FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::UNIX_PATHS);
-        $iterator = new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::CHILD_FIRST);
+        $dir = new \RecursiveDirectoryIterator(
+            $path,
+            \RecursiveDirectoryIterator::SKIP_DOTS | \FilesystemIterator::CURRENT_AS_FILEINFO | \FilesystemIterator::UNIX_PATHS
+        );
+        $iterator = new \RecursiveIteratorIterator($dir, \RecursiveIteratorIterator::CHILD_FIRST);
 
-        /** @var SplFileInfo $fileInfo */
+        /** @var \SplFileInfo $fileInfo */
         foreach ($iterator as $fileInfo) {
             $realPath = $this->unixRealpath($fileInfo->getRealPath());
 
@@ -219,7 +212,6 @@ class Finder
                 if (@!rmdir($realPath)) {
                     throw new FilesystemException('Failed to delete directory ' . $realPath);
                 }
-
             } else {
                 if (strpos($realPath, $this->cacheDir .  '/.') === 0) { //Skip dot-files in root directory
                     continue;

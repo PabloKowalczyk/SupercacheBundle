@@ -2,15 +2,9 @@
 
 namespace PabloK\SupercacheBundle\Command;
 
-
 use PabloK\SupercacheBundle\Cache\CacheManager;
 use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 
-/**
- * Listen for global cache clear event and clears supercache caches.
- *
- * @see {http://symfony.com/doc/current/reference/dic_tags.html#kernel-cache-clearer}
- */
 class CacheClearer implements CacheClearerInterface
 {
     /**
