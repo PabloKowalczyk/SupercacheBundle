@@ -5,38 +5,43 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="PabloK\SupercacheBundle\Filesystem\Finder">
+        <service id="supercache.filesystem.finder" class="PabloK\SupercacheBundle\Filesystem\Finder" public="false">
             <argument type="string">%supercache.cache_dir%</argument>
-            <argument type="service" id="Symfony\Component\Filesystem\Filesystem" />
+            <argument type="service" id="filesystem" />
             <argument type="service" id="logger" on-invalid="null" />
         </service>
 
-        <service id="PabloK\SupercacheBundle\Cache\CacheManager">
-            <argument type="service" id="PabloK\SupercacheBundle\Filesystem\Finder" />
+        <service id="supercache.cache.cache_manager" class="PabloK\SupercacheBundle\Cache\CacheManager" public="false">
+            <argument type="service" id="supercache.filesystem.finder" />
         </service>
 
-        <service id="PabloK\SupercacheBundle\Listeners\KernelListener">
-            <argument type="service" id="PabloK\SupercacheBundle\Cache\RequestHandler" />
-            <argument type="service" id="PabloK\SupercacheBundle\Cache\ResponseHandler" />
+        <service id="supercache.listeners.kernel_listener" class="PabloK\SupercacheBundle\Listeners\KernelListener">
+            <argument type="service" id="supercache.cache.request_handler" />
+            <argument type="service" id="supercache.cache.response_handler" />
 
             <tag name="kernel.event_listener" event="kernel.request" method="onRequest" priority="2147483647" />
             <tag name="kernel.event_listener" event="kernel.response" method="onResponse" priority="-2147483647" />
         </service>
 
-        <service id="PabloK\SupercacheBundle\Cache\RequestHandler">
-            <argument type="service" id="PabloK\SupercacheBundle\Cache\CacheManager" />
+        <service id="supercache.cache.request_handler" class="PabloK\SupercacheBundle\Cache\RequestHandler">
+            <argument type="service" id="supercache.cache.cache_manager" />
             <argument type="string">%supercache.cache_status_header%</argument>
         </service>
 
-        <service id="PabloK\SupercacheBundle\Cache\ResponseHandler">
-            <argument type="service" id="PabloK\SupercacheBundle\Cache\CacheManager" />
+        <service id="supercache.cache.response_handler" class="PabloK\SupercacheBundle\Cache\ResponseHandler">
+            <argument type="service" id="supercache.cache.cache_manager" />
             <argument type="string">%supercache.cache_status_header%</argument>
             <argument type="string">%supercache.enabled%</argument>
         </service>
 
-        <service id="PabloK\SupercacheBundle\Command\CacheClearer">
-            <argument type="service" id="PabloK\SupercacheBundle\Cache\CacheManager" />
+        <service id="supercache.command.cache_clearer" class="PabloK\SupercacheBundle\Command\CacheClearer">
+            <argument type="service" id="supercache.cache.cache_manager" />
             <tag name="kernel.cache_clearer" />
+        </service>
+
+        <service id="supercache.command.clear_command" class="PabloK\SupercacheBundle\Command\ClearCommand">
+            <argument type="service" id="supercache.cache.cache_manager" />
+            <tag name="console.command" />
         </service>
     </services>
 </container>
