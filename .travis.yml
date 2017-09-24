@@ -11,6 +11,8 @@ php:
     - nightly
 
 env:
+    allow_failures:
+        - php: nightly
     matrix:
         - DEPENDENCIES="high"
         - DEPENDENCIES="low"
