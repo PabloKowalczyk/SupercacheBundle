@@ -10,9 +10,11 @@ php:
     - '7.1'
     - nightly
 
-env:
+matrix:
     allow_failures:
         - php: nightly
+
+env:
     matrix:
         - DEPENDENCIES="high"
         - DEPENDENCIES="low"
