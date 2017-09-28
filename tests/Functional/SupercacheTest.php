@@ -83,7 +83,7 @@ class SupercacheTest extends WebTestCase
         return $response;
     }
 
-    private function assertSupercacheHeader(Response $response, string $expectedHeaderValue): void
+    private function assertSupercacheHeader(Response $response, string $expectedHeaderValue)
     {
         $supercacheHeader = $response->headers
             ->get("x-supercache");

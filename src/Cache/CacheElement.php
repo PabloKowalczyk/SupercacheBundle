@@ -84,7 +84,7 @@ class CacheElement
      *
      * @throws \InvalidArgumentException
      */
-    private function setType(string $type): void
+    private function setType(string $type)
     {
         if ($type !== self::TYPE_HTML && $type !== self::TYPE_JAVASCRIPT && $type !== self::TYPE_BINARY) {
             throw new \InvalidArgumentException('Invalid type specified');
@@ -118,7 +118,7 @@ class CacheElement
      *
      * @param string $content
      */
-    public function updateContent(string $content): void
+    public function updateContent(string $content)
     {
         $this->content = $content;
     }
