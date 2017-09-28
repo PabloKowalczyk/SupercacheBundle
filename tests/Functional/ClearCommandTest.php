@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PabloK\SupercacheBundle\Tests;
+namespace PabloK\SupercacheBundle\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;

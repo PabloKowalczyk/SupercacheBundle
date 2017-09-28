@@ -21,12 +21,12 @@ class TestKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load($this->getRootDir() . DIRECTORY_SEPARATOR . 'config.yml');
+        $loader->load($this->getRootDir() . DIRECTORY_SEPARATOR . "config.yml");
     }
 
     public function getCacheDir()
     {
-        return $this->getVarDir(). DIRECTORY_SEPARATOR . 'cache';
+        return $this->getVarDir(). DIRECTORY_SEPARATOR . "cache";
     }
 
     public function getLogDir()

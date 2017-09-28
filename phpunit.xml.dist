@@ -10,12 +10,12 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <server name="KERNEL_DIR" value="tests/" />
+        <server name="KERNEL_DIR" value="tests/TestEnvironment" />
     </php>
 
     <testsuites>
         <testsuite name="SupercacheBundle Test Suite">
-            <directory>tests</directory>
+            <directory>tests/Functional</directory>
         </testsuite>
     </testsuites>
 
