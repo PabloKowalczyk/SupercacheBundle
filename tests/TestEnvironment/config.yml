@@ -3,7 +3,14 @@ parameters:
 
 framework:
     secret: "%secret%"
+    test: ~
+    router:
+        resource: "routing.yml"
 
 supercache:
     enabled: true
     cache_dir: "%kernel.cache_dir%/test-supercache"
+
+services:
+    index_controller:
+        class: PabloK\SupercacheBundle\Tests\TestEnvironment\TestController
