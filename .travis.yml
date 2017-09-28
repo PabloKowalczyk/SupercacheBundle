@@ -29,4 +29,4 @@ install:
     - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest; fi
 
 script:
-    - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+    - vendor/bin/phpunit
