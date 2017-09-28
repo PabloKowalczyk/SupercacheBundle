@@ -19,7 +19,10 @@ apt-get install git \
     "php$PHP_VERSION-mbstring" \
     "php$PHP_VERSION-opcache" \
     "php$PHP_VERSION-xml" \
+    "php-xdebug" \
     "php$PHP_VERSION-intl" -y > /dev/null
+
+phpdismod xdebug;
 
 SCRIPT
 
