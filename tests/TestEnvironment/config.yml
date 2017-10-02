@@ -4,12 +4,16 @@ parameters:
 framework:
     secret: "%secret%"
     test: ~
+    profiler:
+        enabled: true
+        collect: false
     router:
         resource: "routing.yml"
 
 supercache:
     enabled: true
     cache_dir: "%kernel.cache_dir%/test-supercache"
+    cache_status_header: true
 
 services:
     index_controller:
