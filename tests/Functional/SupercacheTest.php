@@ -26,30 +26,15 @@ class SupercacheTest extends WebTestCase
 
     public function setUp()
     {
-        static::bootKernel();
-
+        $this->client = static::createClient();
         $this->container = static::$kernel->getContainer();
-        $this->client = self::createClient();;
         $this->supercacheCacheDirectory = $this->container
             ->getParameter("supercache.cache_dir");
-
-        // Clear cache directory
-        foreach (new \DirectoryIterator($this->supercacheCacheDirectory) as $fileInfo) {
-            if ($fileInfo->isDot()) {
-                continue;
-            }
-
-            unlink($fileInfo->getPathname());
-        }
     }
 
     public function testResponsesAreStoredInCacheDirectory()
     {
-        $client = self::createClient();
-
-        $client->request("GET", "/");
-
-        $response = $client->getResponse();
+        $response = $this->makeRequest();
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertFileExists("{$this->supercacheCacheDirectory}/index.html");
@@ -89,5 +74,19 @@ class SupercacheTest extends WebTestCase
             ->get("x-supercache");
 
         $this->assertSame($expectedHeaderValue, $supercacheHeader);
+    }
+
+    protected function tearDown()
+    {
+        // Clear cache directory
+        foreach (new \DirectoryIterator($this->supercacheCacheDirectory) as $fileInfo) {
+            if ($fileInfo->isDot()) {
+                continue;
+            }
+
+            unlink($fileInfo->getPathname());
+        }
+
+        parent::tearDown();
     }
 }
