@@ -19,6 +19,7 @@
     <testsuites>
         <testsuite name="SupercacheBundle Test Suite">
             <directory>tests/Functional</directory>
+            <directory>tests/Unit</directory>
         </testsuite>
     </testsuites>
 

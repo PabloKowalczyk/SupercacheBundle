@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PabloK\SupercacheBundle\Filesystem;
 
-use Assert\Assertion;
+use PabloK\SupercacheBundle\Exceptions\EmptyPathException;
 use PabloK\SupercacheBundle\Exceptions\FilesystemException;
 use PabloK\SupercacheBundle\Exceptions\PathNotFoundException;
 use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
@@ -35,13 +37,16 @@ class Finder
      * @param string $cacheDir Patch to caching directory
      *
      * @throws FilesystemException Unknown or invalid cache directory specified. It may be a permission problem.
+     * @throws EmptyPathException When passed empty $cacheDir
      */
     public function __construct(
         string $cacheDir,
         Filesystem $filesystem,
         LoggerInterface $logger = null
     ) {
-        Assertion::notEmpty($cacheDir, "Supercache cache dir can't be empty.");
+        if (empty($cacheDir)) {
+            throw new EmptyPathException("Cache directory cannot be empty.");
+        }
 
         if (!$filesystem->exists($cacheDir)) {
             $filesystem->mkdir($cacheDir);
@@ -50,7 +55,7 @@ class Finder
         $realCacheDir = $this->unixRealpath($cacheDir);
 
         if (!$realCacheDir) {
-            throw new FilesystemException("Supercache data directory {$cacheDir} is invalid or inaccessible");
+            throw new FilesystemException("Supercache data directory {$cacheDir} is invalid or inaccessible.");
         }
 
         $this->cacheDir = $realCacheDir;

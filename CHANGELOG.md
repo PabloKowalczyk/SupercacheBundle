@@ -7,3 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Minimum Symfony's components version bumped to `~2.7`
+- `PabloK\SupercacheBundle\Filesystem\Finder` will
+throw `PabloK\SupercacheBundle\Exceptions\EmptyPathException`
+when you pass empty `$cacheDir`
+- Removed `beberlei/assert` dependency
