@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PabloK\SupercacheBundle\Listeners;
 
 use PabloK\SupercacheBundle\Cache\RequestHandler;
@@ -29,16 +31,20 @@ class KernelListener
      * This method is executed on kernel.request event
      *
      * @param GetResponseEvent $event
+     * @return void
      *
      * @see {http://symfony.com/doc/current/components/http_kernel/introduction.html#the-kernel-request-event}
      */
     public function onRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-        $cacheResponse = $this->requestHandler->retrieveCachedResponse($request);
+        $cacheResponse = $this->requestHandler
+            ->retrieveCachedResponse($request);
 
         if ($cacheResponse !== null) {
-            $request->attributes->set('response_source', 'cache');
+            $request->attributes
+                ->set('response_source', 'cache');
+
             $event->setResponse($cacheResponse);
         }
     }
@@ -47,13 +53,17 @@ class KernelListener
      * This method is executed on kernel.response event
      *
      * @param FilterResponseEvent $event
+     * @return void
      *
      * @see {http://symfony.com/doc/current/components/http_kernel/introduction.html#the-kernel-response-event}
      */
     public function onResponse(FilterResponseEvent $event)
     {
         $request = $event->getRequest();
-        if ($request->attributes->get('response_source') === 'cache') { //Prevents re-caching response from cache
+        $responseSource = $request->attributes
+            ->get('response_source');
+
+        if ($responseSource === 'cache') { //Prevents re-caching response from cache
             $event->stopPropagation();
 
             return;
@@ -63,6 +73,7 @@ class KernelListener
             return; //Caching should only occur on master requests, see https://github.com/kiler129/SupercacheBundle/issues/10
         }
 
-        $this->responseHandler->cacheResponse($event->getRequest(), $event->getResponse());
+        $this->responseHandler
+            ->cacheResponse($event->getRequest(), $event->getResponse());
     }
 }
