@@ -16,3 +16,4 @@ when you pass empty `$cacheDir`
 from `PabloK\SupercacheBundle\Cache\CacheElement`
 - Bumped `PHPUnit` to `^6.1` 
 - Added `symfony/yaml` as a dev dependency
+- Allow `^3.0` version of `symfony/phpunit-bridge`
