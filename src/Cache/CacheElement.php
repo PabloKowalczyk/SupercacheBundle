@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PabloK\SupercacheBundle\Cache;
 
 use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
@@ -7,13 +9,13 @@ use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
 class CacheElement
 {
     /** @deprecated Will be moved to CacheType */
-    const TYPE_HTML = 'html';
+    const TYPE_HTML = CacheType::TYPE_HTML;
 
     /** @deprecated Will be moved to CacheType */
-    const TYPE_JAVASCRIPT = 'js';
+    const TYPE_JAVASCRIPT = CacheType::TYPE_JAVASCRIPT;
 
     /** @deprecated Will be moved to CacheType */
-    const TYPE_BINARY = 'bin';
+    const TYPE_BINARY = CacheType::TYPE_BINARY;
 
     /**
      * @var string
@@ -31,9 +33,9 @@ class CacheElement
     private $content;
 
     /**
-     * @param string $path Cache path, eg. /sandbox
+     * @param string $path    Cache path, eg. /sandbox
      * @param string $content Content to cache, eg. HTML
-     * @param string $type Any valid type defined by self::TYPE_* constants
+     * @param string $type    Any valid type defined by self::TYPE_* constants
      *
      * @throws SecurityViolationException Specified cache path was found to be dangerous (eg. /../../sandbox)
      */
@@ -48,27 +50,7 @@ class CacheElement
     }
 
     /**
-     * Sets cached element path
-     *
-     * @param string $path Cache path, eg. /sandbox
-     */
-    private function setPath(string $path)
-    {
-        $this->path = urldecode($path);
-    }
-
-    /**
-     * Sets cached element path without url decoding
-     *
-     * @param string $path Cache path, eg. /sandbox
-     */
-    private function setRawPath(string $path)
-    {
-        $this->path = $path;
-    }
-
-    /**
-     * Provides cached element path
+     * Provides cached element path.
      *
      * @return string
      */
@@ -78,23 +60,7 @@ class CacheElement
     }
 
     /**
-     * Sets element type
-     *
-     * @param string $type Any valid type defined by self::TYPE_* constants
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function setType(string $type)
-    {
-        if ($type !== self::TYPE_HTML && $type !== self::TYPE_JAVASCRIPT && $type !== self::TYPE_BINARY) {
-            throw new \InvalidArgumentException('Invalid type specified');
-        }
-
-        $this->type = $type;
-    }
-
-    /**
-     * Provides cached element type
+     * Provides cached element type.
      *
      * @return string
      */
@@ -104,7 +70,7 @@ class CacheElement
     }
 
     /**
-     * Provides cache element contents
+     * Provides cache element contents.
      *
      * @return string
      */
@@ -114,12 +80,48 @@ class CacheElement
     }
 
     /**
-     * Sets element content
+     * Sets element content.
      *
      * @param string $content
      */
     public function updateContent(string $content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * Sets cached element path.
+     *
+     * @param string $path Cache path, eg. /sandbox
+     */
+    private function setPath(string $path)
+    {
+        $this->path = \urldecode($path);
+    }
+
+    /**
+     * Sets cached element path without url decoding.
+     *
+     * @param string $path Cache path, eg. /sandbox
+     */
+    private function setRawPath(string $path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * Sets element type.
+     *
+     * @param string $type Any valid type defined by self::TYPE_* constants
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function setType(string $type)
+    {
+        if (!\in_array($type, CacheType::TYPES, true)) {
+            throw new \InvalidArgumentException('Invalid type specified');
+        }
+
+        $this->type = $type;
     }
 }

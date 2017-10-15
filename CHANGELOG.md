@@ -11,3 +11,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 throw `PabloK\SupercacheBundle\Exceptions\EmptyPathException`
 when you pass empty `$cacheDir`
 - Removed `beberlei/assert` dependency
+- Added `PabloK\SupercacheBundle\Cache\CacheType` class for type constants
