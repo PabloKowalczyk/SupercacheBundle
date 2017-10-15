@@ -14,3 +14,4 @@ when you pass empty `$cacheDir`
 - Added `PabloK\SupercacheBundle\Cache\CacheType` class for type constants
 - Added `PabloK\SupercacheBundle\Factory\ResponseFactory` class for creating new cache responses
 from `PabloK\SupercacheBundle\Cache\CacheElement`
+- Bumped `PHPUnit` to `^6.1` 
