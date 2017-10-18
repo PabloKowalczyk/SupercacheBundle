@@ -17,3 +17,4 @@ from `PabloK\SupercacheBundle\Cache\CacheElement`
 - Bumped `PHPUnit` to `^6.1` 
 - Added `symfony/yaml` as a dev dependency
 - Allow `^3.0` version of `symfony/phpunit-bridge`
+- Use `PabloK\SupercacheBundle\Factory\ResponseFactory` in `\PabloK\SupercacheBundle\Cache\RequestHandler`

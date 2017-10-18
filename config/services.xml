@@ -25,6 +25,7 @@
 
         <service id="supercache.cache.request_handler" class="PabloK\SupercacheBundle\Cache\RequestHandler">
             <argument type="service" id="supercache.cache.cache_manager" />
+            <argument type="service" id="supercache.factory.response_factory" />
             <argument type="string">%supercache.cache_status_header%</argument>
         </service>
 
@@ -43,5 +44,10 @@
             <argument type="service" id="supercache.cache.cache_manager" />
             <tag name="console.command" />
         </service>
+
+        <service id="supercache.factory.response_factory"
+                 class="PabloK\SupercacheBundle\Factory\ResponseFactory"
+                 public="false"
+        />
     </services>
 </container>

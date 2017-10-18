@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PabloK\SupercacheBundle\Cache;
 
 use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
-use PabloK\SupercacheBundle\Http\CacheResponse;
+use PabloK\SupercacheBundle\Factory\ResponseFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,16 +15,23 @@ class RequestHandler
      * @var bool
      */
     private $addStatusHeader;
-
     /**
      * @var CacheManager
      */
     private $cacheManager;
+    /**
+     * @var ResponseFactory
+     */
+    private $responseFactory;
 
-    public function __construct(CacheManager $cacheManager, bool $addStatusHeader)
-    {
+    public function __construct(
+        CacheManager $cacheManager,
+        ResponseFactory $responseFactory,
+        bool $addStatusHeader
+    ) {
         $this->cacheManager = $cacheManager;
         $this->addStatusHeader = $addStatusHeader;
+        $this->responseFactory = $responseFactory;
     }
 
     /**
@@ -30,22 +39,28 @@ class RequestHandler
      *
      * @param Request $request
      *
-     * @return Response|null Will return cached content as response or null if there's nothing to return.
+     * @return Response|null will return cached content as response or null if there's nothing to return
+     *
      * @throws SecurityViolationException Tried to obtain cache entry using unsafe path. Generally it should never occur
-     *     unless invalid Request is passed.
+     *                                    unless invalid Request is passed.
      */
     public function retrieveCachedResponse(Request $request)
     {
-        if ($this->isCacheable($request) !== true) {
+        if (true !== $this->isCacheable($request)) {
             return null;
         }
 
-        $cacheElement = $this->cacheManager->getElement($request->getPathInfo());
-        if ($cacheElement === null) {
+        $cacheElement = $this->cacheManager
+            ->getElement($request->getPathInfo());
+
+        if (null === $cacheElement) {
             return null;
         }
 
-        return CacheResponse::createFromElement($cacheElement, (($this->addStatusHeader) ? 'HIT,PHP' : null));
+        $responseStatus = (($this->addStatusHeader) ? 'HIT,PHP' : null);
+
+        return $this->responseFactory
+            ->createResponseFromCacheElement($cacheElement, $responseStatus);
     }
 
     /**
@@ -55,11 +70,13 @@ class RequestHandler
      */
     public function isCacheable(Request $request)
     {
-        if ($request->getMethod() !== 'GET') {
+        if ('GET' !== $request->getMethod()) {
             return CacheManager::UNCACHEABLE_METHOD;
         }
 
-        $queryString = $request->server->get('QUERY_STRING');
+        $queryString = $request->server
+            ->get('QUERY_STRING');
+
         if (!empty($queryString)) {
             return CacheManager::UNCACHEABLE_QUERY;
         }
