@@ -54,6 +54,17 @@ class SupercacheTest extends WebTestCase
         $this->assertFileExists("{$this->supercacheCacheDirectory}/index.html");
     }
 
+    public function testResponsesAreMinified()
+    {
+        $response = $this->makeRequest();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertStringEqualsFile(
+            "{$this->supercacheCacheDirectory}/index.html",
+            '<html> <body> <h1>Testing env welcome to.</h1> </body> </html>'
+        );
+    }
+
     public function testResponseHasMissHeaderOnFirstRequest()
     {
         $response = $this->makeRequest();

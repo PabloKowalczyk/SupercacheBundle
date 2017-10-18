@@ -10,6 +10,7 @@ use PabloK\SupercacheBundle\Exceptions\PathNotFoundException;
 use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use voku\helper\HtmlMin;
 
 /**
  * Handles all filesystem operations.
@@ -29,9 +30,9 @@ class Finder
      */
     private $logger;
     /**
-     * @var Filesystem
+     * @var HtmlMin
      */
-    private $filesystem;
+    private $htmlMin;
 
     /**
      * @param string $cacheDir Patch to caching directory
@@ -42,6 +43,7 @@ class Finder
     public function __construct(
         string $cacheDir,
         Filesystem $filesystem,
+        HtmlMin $htmlMin,
         LoggerInterface $logger = null
     ) {
         if (empty($cacheDir)) {
@@ -60,7 +62,7 @@ class Finder
 
         $this->cacheDir = $realCacheDir;
         $this->logger = $logger;
-        $this->filesystem = $filesystem;
+        $this->htmlMin = $htmlMin;
     }
 
     /**
@@ -206,11 +208,6 @@ class Finder
     /**
      * Saves content to given cache file.
      *
-     * @param $path
-     * @param $content
-     *
-     * @return bool
-     *
      * @throws FilesystemException
      * @throws SecurityViolationException Should never be thrown from this method. If thrown it means some security
      *                                    mechanisms failed to sanitize $path and file gets created outside cache directory. This method is smart
@@ -218,8 +215,11 @@ class Finder
      *                                    calling this method fill bug report asap.
      * @throws \InvalidArgumentException  given path doesn't look like file created by this bundle
      */
-    public function writeFile($path, $content)
-    {
+    public function writeFile(
+        string $path,
+        string $content,
+        bool $minifyHtml
+    ): bool {
         $fullPath = \preg_replace('/(\/|\\\)+/', '/', $this->cacheDir . '/' . $path); //Convert to absolute path with unix separators & remove duplicated slashed
 
         if (\preg_match('/\/\.\.|\.\.\//', $fullPath)) { //Don't look at me that way, please...
@@ -233,6 +233,11 @@ class Finder
         $info = \pathinfo($fullPath);
         if (!isset($info['dirname']) || (!\is_dir($info['dirname']) && !\mkdir($info['dirname'], 0777, true))) {
             throw new FilesystemException('Failed to create directory for ' . $path);
+        }
+
+        if ($minifyHtml) {
+            $content = $this->htmlMin
+                ->minify($content);
         }
 
         if (false === \file_put_contents($fullPath, $content)) {

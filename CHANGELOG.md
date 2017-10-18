@@ -19,3 +19,4 @@ from `PabloK\SupercacheBundle\Cache\CacheElement`
 - Allow `^3.0` version of `symfony/phpunit-bridge`
 - Use `PabloK\SupercacheBundle\Factory\ResponseFactory` in `\PabloK\SupercacheBundle\Cache\RequestHandler`
 - Introduce PHP-CS-Fixer
+- Added `voku/html-min` to minify html content

@@ -237,6 +237,11 @@ class CacheManager
     {
         $path = $element->getPath() . '/index.' . $element->getType(); //Type contains extension
 
-        return $this->finder->writeFile($path, $element->getContent());
+        return $this->finder
+            ->writeFile(
+                $path,
+                $element->getContent(),
+                CacheType::TYPE_HTML === $element->getType()
+            );
     }
 }

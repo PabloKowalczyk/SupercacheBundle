@@ -8,6 +8,7 @@
         <service id="supercache.filesystem.finder" class="PabloK\SupercacheBundle\Filesystem\Finder" public="false">
             <argument type="string">%supercache.cache_dir%</argument>
             <argument type="service" id="filesystem" />
+            <argument type="service" id="voku.helper.html_min" />
             <argument type="service" id="logger" on-invalid="null" />
         </service>
 
@@ -49,5 +50,7 @@
                  class="PabloK\SupercacheBundle\Factory\ResponseFactory"
                  public="false"
         />
+
+        <service id="voku.helper.html_min" class="voku\helper\HtmlMin" />
     </services>
 </container>

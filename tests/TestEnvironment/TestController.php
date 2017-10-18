@@ -10,7 +10,14 @@ class TestController
 {
     public function indexAction()
     {
-        $response = new Response('<html><body><h1>Testing env welcome to.</h1></body></html>');
+        $response = new Response(<<<HTML
+            <html>
+                <body>
+                    <h1>Testing env welcome to.</h1>
+                </body>
+            </html>
+HTML
+        );
 
         $response->setPublic();
 
