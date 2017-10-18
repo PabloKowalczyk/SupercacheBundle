@@ -17,6 +17,6 @@ class FinderTest extends TestCase
 
         $this->expectException(EmptyPathException::class);
 
-        new Finder("", $mockFilesystem);
+        new Finder('', $mockFilesystem);
     }
 }

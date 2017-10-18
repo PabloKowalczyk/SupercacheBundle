@@ -28,10 +28,9 @@ class KernelListener
     }
 
     /**
-     * This method is executed on kernel.request event
+     * This method is executed on kernel.request event.
      *
      * @param GetResponseEvent $event
-     * @return void
      *
      * @see {http://symfony.com/doc/current/components/http_kernel/introduction.html#the-kernel-request-event}
      */
@@ -41,7 +40,7 @@ class KernelListener
         $cacheResponse = $this->requestHandler
             ->retrieveCachedResponse($request);
 
-        if ($cacheResponse !== null) {
+        if (null !== $cacheResponse) {
             $request->attributes
                 ->set('response_source', 'cache');
 
@@ -50,10 +49,9 @@ class KernelListener
     }
 
     /**
-     * This method is executed on kernel.response event
+     * This method is executed on kernel.response event.
      *
      * @param FilterResponseEvent $event
-     * @return void
      *
      * @see {http://symfony.com/doc/current/components/http_kernel/introduction.html#the-kernel-response-event}
      */
@@ -63,7 +61,7 @@ class KernelListener
         $responseSource = $request->attributes
             ->get('response_source');
 
-        if ($responseSource === 'cache') { //Prevents re-caching response from cache
+        if ('cache' === $responseSource) { //Prevents re-caching response from cache
             $event->stopPropagation();
 
             return;

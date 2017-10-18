@@ -1,33 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PabloK\SupercacheBundle\Cache;
 
 use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ResponseHandler
 {
     /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
      * @var bool
      */
-
     private $addStatusHeader;
-
     /**
      * @var CacheManager
      */
     private $cacheManager;
-    /**
-     * @var string
-     */
-    private $environment;
     /**
      * @var bool
      */
@@ -46,64 +36,47 @@ class ResponseHandler
     /**
      * Tries to cache given response.
      *
-     * @param Request $request
+     * @param Request  $request
      * @param Response $response
      *
      * @return bool
+     *
      * @throws SecurityViolationException Tried to save cache entry wih unsafe path. Generally it should never occur
-     *     unless invalid Request is passed.
+     *                                    unless invalid Request is passed.
      */
     public function cacheResponse(Request $request, Response $response)
     {
         $isCacheable = $this->isCacheable($request, $response);
-        if ($isCacheable !== true) {
+
+        if (true !== $isCacheable) {
             if ($this->addStatusHeader) {
-                $response->headers->set('X-Supercache',
-                    'uncacheable,' . CacheManager::getUncachableReasonFromCode($isCacheable));
+                $response->headers
+                    ->set(
+                        'X-Supercache',
+                        'uncacheable,' . CacheManager::getUncachableReasonFromCode($isCacheable)
+                    );
             }
 
             return false;
         }
 
-        $status = $this->cachePush($request->getPathInfo(), $response->getContent(),
-            $response->headers->get('Content-Type', 'application/octet-stream'));
+        $status = $this->cachePush(
+            $request->getPathInfo(),
+            $response->getContent(),
+            $response->headers
+                ->get('Content-Type', 'application/octet-stream')
+        );
 
         if ($this->addStatusHeader) {
-            $response->headers->set('X-Supercache', 'MISS,' . (int)$status);
+            $response->headers
+                ->set('X-Supercache', 'MISS,' . (int) $status);
         }
 
-        return (bool)$status;
+        return (bool) $status;
     }
 
     /**
-     * Saves content to cache.
-     *
-     * @param string $path HTTP path.
-     * @param string $content Raw content to cache.
-     * @param string $contentType Response Content-Type. It can be just plain MIME type or like "text/html;
-     *     charset=UTF-8"
-     *
-     * @return bool
-     * @throws SecurityViolationException
-     */
-    private function cachePush($path, $content, $contentType)
-    {
-        //Guess cache type from mime. Basic rules were defined by https://github.com/kiler129/SupercacheBundle/issues/2
-        if (strpos($contentType, '/javascript') !== false || strpos($contentType, '/json') !== false) {
-            $type = CacheElement::TYPE_JAVASCRIPT;
-        } elseif (strpos($contentType, 'text/') !== false) {
-            $type = CacheElement::TYPE_HTML;
-        } else {
-            $type = CacheElement::TYPE_BINARY;
-        }
-
-        $element = new CacheElement($path, $content, $type);
-
-        return $this->cacheManager->saveElement($element);
-    }
-
-    /**
-     * @param Request $request
+     * @param Request  $request
      * @param Response $response
      *
      * @return bool|int Will return integer code if response cannot be cached or true if it's cacheable
@@ -114,11 +87,11 @@ class ResponseHandler
             return CacheManager::UNCACHEABLE_DISABLED;
         }
 
-        if ($request->attributes->get('_supercache') === false) {
+        if (false === $request->attributes->get('_supercache')) {
             return CacheManager::UNCACHEABLE_ROUTE;
         }
 
-        if ($request->getMethod() !== 'GET') {
+        if ('GET' !== $request->getMethod()) {
             return CacheManager::UNCACHEABLE_METHOD;
         }
 
@@ -141,5 +114,34 @@ class ResponseHandler
         }
 
         return true;
+    }
+
+    /**
+     * Saves content to cache.
+     *
+     * @param string $path        HTTP path
+     * @param string $content     raw content to cache
+     * @param string $contentType Response Content-Type. It can be just plain MIME type or like "text/html;
+     *                            charset=UTF-8"
+     *
+     * @return bool
+     *
+     * @throws SecurityViolationException
+     */
+    private function cachePush($path, $content, $contentType)
+    {
+        //Guess cache type from mime. Basic rules were defined by https://github.com/kiler129/SupercacheBundle/issues/2
+        if (false !== \strpos($contentType, '/javascript') || false !== \strpos($contentType, '/json')) {
+            $type = CacheElement::TYPE_JAVASCRIPT;
+        } elseif (false !== \strpos($contentType, 'text/')) {
+            $type = CacheElement::TYPE_HTML;
+        } else {
+            $type = CacheElement::TYPE_BINARY;
+        }
+
+        $element = new CacheElement($path, $content, $type);
+
+        return $this->cacheManager
+            ->saveElement($element);
     }
 }

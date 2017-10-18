@@ -1,7 +1,8 @@
 <?php
 
-namespace PabloK\SupercacheBundle\Exceptions;
+declare(strict_types=1);
 
+namespace PabloK\SupercacheBundle\Exceptions;
 
 /**
  * Thrown when requested filesystem patch cannot be found.
@@ -9,12 +10,12 @@ namespace PabloK\SupercacheBundle\Exceptions;
 class PathNotFoundException extends FilesystemException
 {
     /**
-     * @param string $path Filename or path which cannot be found.
-     * @param string $details
+     * @param string $path filename or path which cannot be found
      */
-    public function __construct($path, $details = '')
+    public function __construct(string $path, string $details = '')
     {
         $message = 'Failed to locate filesystem path ' . $path;
+
         if (!empty($details)) {
             $message .= ' - ' . $details . '.';
         }

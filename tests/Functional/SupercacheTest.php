@@ -29,7 +29,21 @@ class SupercacheTest extends WebTestCase
         $this->client = static::createClient();
         $this->container = static::$kernel->getContainer();
         $this->supercacheCacheDirectory = $this->container
-            ->getParameter("supercache.cache_dir");
+            ->getParameter('supercache.cache_dir');
+    }
+
+    protected function tearDown()
+    {
+        // Clear cache directory
+        foreach (new \DirectoryIterator($this->supercacheCacheDirectory) as $fileInfo) {
+            if ($fileInfo->isDot()) {
+                continue;
+            }
+
+            \unlink($fileInfo->getPathname());
+        }
+
+        parent::tearDown();
     }
 
     public function testResponsesAreStoredInCacheDirectory()
@@ -45,7 +59,7 @@ class SupercacheTest extends WebTestCase
         $response = $this->makeRequest();
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertSupercacheHeader($response, "MISS,1");
+        $this->assertSupercacheHeader($response, 'MISS,1');
     }
 
     public function testResponseHasHitHeaderOnSecondRequest()
@@ -54,13 +68,13 @@ class SupercacheTest extends WebTestCase
         $response = $this->makeRequest();
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertSupercacheHeader($response, "HIT,PHP");
+        $this->assertSupercacheHeader($response, 'HIT,PHP');
     }
 
     private function makeRequest(): Response
     {
         $this->client
-            ->request("GET", "");
+            ->request('GET', '');
 
         $response = $this->client
             ->getResponse();
@@ -71,22 +85,8 @@ class SupercacheTest extends WebTestCase
     private function assertSupercacheHeader(Response $response, string $expectedHeaderValue)
     {
         $supercacheHeader = $response->headers
-            ->get("x-supercache");
+            ->get('x-supercache');
 
         $this->assertSame($expectedHeaderValue, $supercacheHeader);
-    }
-
-    protected function tearDown()
-    {
-        // Clear cache directory
-        foreach (new \DirectoryIterator($this->supercacheCacheDirectory) as $fileInfo) {
-            if ($fileInfo->isDot()) {
-                continue;
-            }
-
-            unlink($fileInfo->getPathname());
-        }
-
-        parent::tearDown();
     }
 }

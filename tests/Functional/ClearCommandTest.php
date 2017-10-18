@@ -15,7 +15,7 @@ class ClearCommandTest extends KernelTestCase
 
         $container = self::$kernel->getContainer();
 
-        $command = $container->get("supercache.command.clear_command");
+        $command = $container->get('supercache.command.clear_command');
 
         $commandTester = new CommandTester($command);
 

@@ -32,3 +32,6 @@ composer.lock
 # Vagrant
 ubuntu-*-console.log
 .vagrant
+
+# PHP CS Fixer
+.php_cs.cache

@@ -1,7 +1,8 @@
 <?php
 
-namespace PabloK\SupercacheBundle\Cache;
+declare(strict_types=1);
 
+namespace PabloK\SupercacheBundle\Cache;
 
 use PabloK\SupercacheBundle\Exceptions\FilesystemException;
 use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
@@ -23,16 +24,15 @@ class CacheManager
     /**
      * @var array Human readable values for UNCACHEABLE_* codes
      */
-    private static $readableUncachableExplanation = array(
+    private static $readableUncachableExplanation = [
         self::UNCACHEABLE_PRIVATE => 'private',
         self::UNCACHEABLE_NO_STORE_POLICY => 'no-store-policy',
         self::UNCACHEABLE_QUERY => 'query-string',
         self::UNCACHEABLE_CODE => 'code',
         self::UNCACHEABLE_METHOD => 'method',
         self::UNCACHEABLE_ROUTE => 'route',
-        self::UNCACHEABLE_DISABLED => "disabled"
-    );
-
+        self::UNCACHEABLE_DISABLED => 'disabled',
+    ];
     /**
      * @var Finder
      */
@@ -49,9 +49,10 @@ class CacheManager
     /**
      * Translates UNCACHEABLE_* reason codes into more human readable form.
      *
-     * @param integer $code Any code available by UNCACHEABLE_* constants
+     * @param int $code Any code available by UNCACHEABLE_* constants
      *
      * @return string
+     *
      * @throws \InvalidArgumentException Unknown code
      */
     public static function getUncachableReasonFromCode($code)
@@ -81,7 +82,7 @@ class CacheManager
      * Provides list of all cached elements.
      *
      * @param null|string $parent Branch to start from. Eg. you can specify /sandbox and you'll get /sandbox,
-     *     /sandbox/info but not /test or /test/sandbox.
+     *                            /sandbox/info but not /test or /test/sandbox.
      *
      * @return array[]
      */
@@ -89,21 +90,20 @@ class CacheManager
     {
         $filesList = $this->finder->getFilesList();
         $basePath = $this->finder->getRealCacheDir();
-        $basePathLength = mb_strlen($basePath);
+        $basePathLength = \mb_strlen($basePath);
 
-        $entries = array();
+        $entries = [];
 
         foreach ($filesList as $e) {
-            $entry = mb_substr($e->getPath(), $basePathLength);
+            $entry = \mb_substr($e->getPath(), $basePathLength);
 
-            if ($entry === '') {
+            if ('' === $entry) {
                 $entry = '/';
-
             } elseif (DIRECTORY_SEPARATOR !== '/') { //Why elseif and not if below? Simple - it's waste of time to call str_replace when $entry was empty before
-                $entry = str_replace($entry, DIRECTORY_SEPARATOR, '/'); //Did I mention I hate Windos?
+                $entry = \str_replace($entry, DIRECTORY_SEPARATOR, '/'); //Did I mention I hate Windos?
             }
 
-            if ($parent && strpos($entry, $parent) !== 0) {
+            if ($parent && 0 !== \strpos($entry, $parent)) {
                 continue;
             }
 
@@ -114,18 +114,19 @@ class CacheManager
     }
 
     /**
-     * Deletes single cache entry
+     * Deletes single cache entry.
      *
      * @param string $path Cache path, eg. /sandbox
      *
      * @return bool
+     *
      * @throws \InvalidArgumentException Invalid cache patch specified. Patch which doesn't not exist but it's valid
-     *     will not cause this exception.
+     *                                   will not cause this exception.
      */
     public function deleteEntry($path)
     {
         if (DIRECTORY_SEPARATOR !== '/') { //Path will always have / (bcs it's http path), no matter on which OS
-            $path = str_replace('/', DIRECTORY_SEPARATOR, $path); //...but filesystem differ
+            $path = \str_replace('/', DIRECTORY_SEPARATOR, $path); //...but filesystem differ
         }
 
         $filePath = $path . DIRECTORY_SEPARATOR . 'index.html'; //File path
@@ -151,13 +152,14 @@ class CacheManager
      * @param string $path Cache path, eg. /sandbox
      *
      * @return bool
-     * @throws \RuntimeException For details please {@see Finder::deleteDirectoryRecursive()}
+     *
+     * @throws \RuntimeException   For details please {@see Finder::deleteDirectoryRecursive()}
      * @throws FilesystemException
      */
     public function deleteEntryRecursive($path)
     {
         if (DIRECTORY_SEPARATOR !== '/') {
-            $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+            $path = \str_replace('/', DIRECTORY_SEPARATOR, $path);
         }
 
         if (!$this->finder->isReadable($path)) {
@@ -172,6 +174,7 @@ class CacheManager
      * Alias for deleteEntryRecursive('/').
      *
      * @return bool
+     *
      * @see deleteEntryRecursive()
      */
     public function clear()
@@ -189,28 +192,28 @@ class CacheManager
      */
     public function getElement($path, $type = null)
     {
-        if ($type === null) {
+        if (null === $type) {
             $basePath = $path . '/';
 
             $content = $this->finder->readFile($basePath . '/index.' . CacheElement::TYPE_HTML);
-            if ($content !== false) {
+            if (false !== $content) {
                 return new CacheElement($path, $content, CacheElement::TYPE_HTML);
             }
 
             $content = $this->finder->readFile($basePath . '/index.' . CacheElement::TYPE_JAVASCRIPT);
-            if ($content !== false) {
+            if (false !== $content) {
                 return new CacheElement($path, $content, CacheElement::TYPE_JAVASCRIPT);
             }
 
             $content = $this->finder->readFile($basePath . '/index.' . CacheElement::TYPE_BINARY);
-            if ($content !== false) {
+            if (false !== $content) {
                 return new CacheElement($path, $content, CacheElement::TYPE_BINARY);
             }
         } else {
             $element = new CacheElement($path, '', $type); //This will also verify type
             $content = $this->finder->readFile($path . '/index.' . CacheElement::TYPE_BINARY);
 
-            if ($content !== false) {
+            if (false !== $content) {
                 $element->updateContent($content);
             }
 
@@ -226,6 +229,7 @@ class CacheManager
      * @param CacheElement $element
      *
      * @return bool
+     *
      * @throws FilesystemException
      * @throws SecurityViolationException Specified cache path was found to be dangerous (eg. /../../sandbox)
      */

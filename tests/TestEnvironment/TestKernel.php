@@ -13,7 +13,7 @@ class TestKernel extends Kernel
     {
         $bundles = [
             new FrameworkBundle(),
-            new SupercacheBundle()
+            new SupercacheBundle(),
         ];
 
         return $bundles;
@@ -21,27 +21,27 @@ class TestKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load($this->getRootDir() . DIRECTORY_SEPARATOR . "config.yml");
+        $loader->load($this->getRootDir() . DIRECTORY_SEPARATOR . 'config.yml');
     }
 
     public function getCacheDir()
     {
-        return $this->getVarDir(). DIRECTORY_SEPARATOR . "cache";
+        return $this->getVarDir() . DIRECTORY_SEPARATOR . 'cache';
     }
 
     public function getLogDir()
     {
-        return $this->getVarDir() . DIRECTORY_SEPARATOR . "logs";
+        return $this->getVarDir() . DIRECTORY_SEPARATOR . 'logs';
     }
 
     private function getVarDir()
     {
         $varDir = [
-            sys_get_temp_dir(),
-            "supercache",
-            "var"
+            \sys_get_temp_dir(),
+            'supercache',
+            'var',
         ];
 
-        return implode(DIRECTORY_SEPARATOR, $varDir);
+        return \implode(DIRECTORY_SEPARATOR, $varDir);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PabloK\SupercacheBundle\Command;
 
 use PabloK\SupercacheBundle\Cache\CacheManager;
@@ -23,8 +25,8 @@ class CacheClearer implements CacheClearerInterface
     /**
      * Clears any caches necessary.
      *
-     * @param string $cacheDir The cache directory - it's unused because SupercacheBundle uses different directory
-     *     outside standard caching directory.
+     * @param string $cacheDir the cache directory - it's unused because SupercacheBundle uses different directory
+     *                         outside standard caching directory
      */
     public function clear($cacheDir)
     {

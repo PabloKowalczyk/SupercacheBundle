@@ -1,21 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PabloK\SupercacheBundle\Exceptions;
-
-
-use Exception;
 
 /**
  * Thrown on serious security-related events - you should NEVER ignore that exception!
  */
 class SecurityViolationException extends \RuntimeException
 {
-    /**
-     * @inheritDoc
-     */
-    public function __construct($message = "", $code = 0, Exception $previous = null)
-    {
-        $newMessage = "Security violation occurred, operation was aborted.";
+    public function __construct(
+        string $message = '',
+        int $code = 0,
+        \Exception $previous = null
+    ) {
+        $newMessage = 'Security violation occurred, operation was aborted.';
 
         if (!empty($message)) {
             $newMessage .= ' ' . $message;

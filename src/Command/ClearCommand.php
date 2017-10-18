@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PabloK\SupercacheBundle\Command;
 
 use PabloK\SupercacheBundle\Cache\CacheManager;

@@ -2,9 +2,11 @@
 # vi: set ft=ruby :
 
 $phpVersion = "7.0";
-$composerVersion = "1.5.2";
 $binDir = "/home/ubuntu/bin";
+$composerVersion = "1.5.2";
 $composerFile = $binDir + "/composer";
+$csFixerVersion = "2.7.1";
+$csFixerFile = $binDir + "/php-cs-fixer";
 
 Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu/xenial64"
@@ -31,6 +33,12 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell" do |s|
         s.path = "vagrant/composer.sh"
         s.args = [$composerVersion, $binDir, $composerFile]
+        s.privileged = false
+    end
+
+    config.vm.provision "shell" do |s|
+        s.path = "vagrant/cs-fixer.sh"
+        s.args = [$csFixerVersion, $binDir, $csFixerFile]
         s.privileged = false
     end
 end

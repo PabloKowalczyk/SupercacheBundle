@@ -1,30 +1,28 @@
 <?php
 
-namespace PabloK\SupercacheBundle\Http;
+declare(strict_types=1);
 
+namespace PabloK\SupercacheBundle\Http;
 
 use PabloK\SupercacheBundle\Cache\CacheElement;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-/**
- * Class CacheResponse
- */
 class CacheResponse extends SymfonyResponse
 {
     /**
      * Creates new CacheResponse object from given CacheElement.
      *
      * @param CacheElement $element
-     * @param null $status Value for X-Supercache header. By default null (no header will be added).
+     * @param null         $status  Value for X-Supercache header. By default null (no header will be added).
      *
      * @return static
      */
-    public static function createFromElement(CacheElement $element, $status = null)
+    public static function createFromElement(CacheElement $element, $status = null): CacheResponse
     {
         $mime = self::getMimeByType($element->getType());
-        $headers = array('Content-Type' => $mime);
+        $headers = ['Content-Type' => $mime];
 
-        if ($status !== null) {
+        if (null !== $status) {
             $headers['X-Supercache'] = $status;
         }
 
