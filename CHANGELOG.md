@@ -20,3 +20,4 @@ from `PabloK\SupercacheBundle\Cache\CacheElement`
 - Use `PabloK\SupercacheBundle\Factory\ResponseFactory` in `\PabloK\SupercacheBundle\Cache\RequestHandler`
 - Introduce PHP-CS-Fixer
 - Added `voku/html-min` to minify html content
+- Added `--prefer-dist` to Composer to TravisCI builds.

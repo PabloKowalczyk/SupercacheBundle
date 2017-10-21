@@ -20,7 +20,7 @@ env:
         - DEPENDENCIES="high"
         - DEPENDENCIES="low"
     global:
-        - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-progress --no-suggest"
+        - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-progress --no-suggest --prefer-dist"
 
 before_install:
     - composer self-update
