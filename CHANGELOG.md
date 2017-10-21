@@ -21,3 +21,4 @@ from `PabloK\SupercacheBundle\Cache\CacheElement`
 - Introduce PHP-CS-Fixer
 - Added `voku/html-min` to minify html content
 - Added `--prefer-dist` to Composer to TravisCI builds.
+- Changed Vagrant PHP OPcache folder to `/home/vagrant/tmp/php/opcache`
