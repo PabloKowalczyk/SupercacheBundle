@@ -50,10 +50,6 @@ class Finder
             throw new EmptyPathException('Cache directory cannot be empty.');
         }
 
-        if (!$filesystem->exists($cacheDir)) {
-            $filesystem->mkdir($cacheDir);
-        }
-
         $realCacheDir = $this->unixRealpath($cacheDir);
 
         if (!$realCacheDir) {
