@@ -23,3 +23,4 @@ from `PabloK\SupercacheBundle\Cache\CacheElement`
 - Added `--prefer-dist` to Composer to TravisCI builds.
 - Changed Vagrant PHP OPcache folder to `/home/vagrant/tmp/php/opcache`
 - Cache Composer files in TravisCI builds
+- Added `.php_cs.dist` to files ignored on export
