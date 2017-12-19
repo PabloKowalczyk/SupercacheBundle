@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Added badges with build status to `README.md` file
+
 ### Changed
 - Bumped Vagrant's Composer and PHPCSFixer
 - Bumped minimum `PHP` version to `7.1.3`
