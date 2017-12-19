@@ -3,9 +3,9 @@
 
 $phpVersion = "7.0";
 $binDir = "/home/ubuntu/bin";
-$composerVersion = "1.5.2";
+$composerVersion = "1.5.6";
 $composerFile = $binDir + "/composer";
-$csFixerVersion = "2.7.1";
+$csFixerVersion = "2.9.0";
 $csFixerFile = $binDir + "/php-cs-fixer";
 
 Vagrant.configure("2") do |config|
