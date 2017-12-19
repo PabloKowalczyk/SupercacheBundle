@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace PabloK\SupercacheBundle\Tests\TestEnvironment;
+
 use PabloK\SupercacheBundle\SupercacheBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;

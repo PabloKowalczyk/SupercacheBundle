@@ -18,3 +18,4 @@ supercache:
 services:
     index_controller:
         class: PabloK\SupercacheBundle\Tests\TestEnvironment\TestController
+        public: true

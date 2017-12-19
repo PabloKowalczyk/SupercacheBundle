@@ -7,10 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Added badges with build status to `README.md` file
+- Added support for `Symfony` `4.0` components
 
 ### Changed
 - Bumped Vagrant's Composer and PHPCSFixer
 - Bumped minimum `PHP` version to `7.1.3`
+- Bumped minimum `Symfony` components version to `2.8`
+- Reverted `PHPUnit` to `5.7` version
 
 ## [0.2.0] - 2017-11-21
 ### Changed

@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../vendor/autoload.php';
+use PabloK\SupercacheBundle\Tests\TestEnvironment\TestKernel;
 
-if (!\class_exists(\PHPUnit_Framework_TestCase::class)) {
-    \class_alias(\PHPUnit\Framework\TestCase::class, \PHPUnit_Framework_TestCase::class);
-}
+require_once __DIR__ . '/../vendor/autoload.php';
+
+class_alias(TestKernel::class, \TestKernel::class);
