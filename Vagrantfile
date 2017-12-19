@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-$phpVersion = "7.0";
+$phpVersion = "7.1";
 $binDir = "/home/ubuntu/bin";
 $composerVersion = "1.5.6";
 $composerFile = $binDir + "/composer";

@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Bumped Vagrant's Composer and PHPCSFixer
+- Bumped minimum `PHP` version to `7.1.3`
 
 ## [0.2.0] - 2017-11-21
 ### Changed
