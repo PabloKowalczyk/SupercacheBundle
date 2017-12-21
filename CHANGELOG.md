@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Bumped minimum `PHP` version to `7.1.3`
 - Bumped minimum `Symfony` components version to `2.8`
 - Reverted `PHPUnit` to `5.7` version
+- Bumped `voku/html-min` to `2.0` version
 
 ## [0.2.0] - 2017-11-21
 ### Changed
