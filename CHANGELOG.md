@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - `PHPCSFixer` moved to `vendor-bin`
 - `PHPCSFixer` check added to CI
+- Allow `fast_finish` on TravisCI build
 
 ## [0.3.1] - 2017-12-21
 ### Added
