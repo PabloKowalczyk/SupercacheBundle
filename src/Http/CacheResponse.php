@@ -17,7 +17,7 @@ class CacheResponse extends SymfonyResponse
      *
      * @return static
      */
-    public static function createFromElement(CacheElement $element, $status = null): CacheResponse
+    public static function createFromElement(CacheElement $element, $status = null): self
     {
         $mime = self::getMimeByType($element->getType());
         $headers = ['Content-Type' => $mime];

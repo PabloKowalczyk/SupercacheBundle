@@ -61,7 +61,7 @@ class SupercacheTest extends WebTestCase
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame(
             '<html><body><h1>Testing env welcome to.</h1>',
-            file_get_contents("{$this->supercacheCacheDirectory}/index.html")
+            \file_get_contents("{$this->supercacheCacheDirectory}/index.html")
         );
     }
 

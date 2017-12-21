@@ -27,6 +27,7 @@ build/*
 # Composer
 composer.phar
 vendor/*
+vendor-bin/*/vendor/
 composer.lock
 
 # Vagrant
