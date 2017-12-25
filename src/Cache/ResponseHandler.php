@@ -72,7 +72,7 @@ class ResponseHandler
                 ->set('X-Supercache', 'MISS,' . (int) $status);
         }
 
-        return (bool) $status;
+        return $status;
     }
 
     /**
