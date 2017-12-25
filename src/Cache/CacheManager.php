@@ -185,12 +185,11 @@ class CacheManager
     /**
      * Tries to retrieve element from cache by it's path.
      *
-     * @param $path
-     * @param null|string $type Contents of CacheElement::TYPE_* or null to get any type
+     * @param ?string $type Contents of CacheElement::TYPE_* or null to get any type
      *
      * @return CacheElement|null
      */
-    public function getElement($path, $type = null)
+    public function getElement(string $path, ?string $type = null)
     {
         if (null === $type) {
             $basePath = $path . '/';

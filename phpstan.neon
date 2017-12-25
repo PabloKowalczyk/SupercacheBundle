@@ -1,3 +1,5 @@
 parameters:
-	excludes_analyse:
-		- %rootDir%/../../../../../tests/bootstrap.php
+    excludes_analyse:
+        # Makes PHPStan crash
+        - '**/DependencyInjection/Configuration.php'
+        - '**/tests/bootstrap.php'

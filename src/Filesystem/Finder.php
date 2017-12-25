@@ -274,8 +274,6 @@ class Finder
     /**
      * Checks if given cache file/folder is readable.
      *
-     * @param $path
-     *
      * @return bool
      *
      * @throws SecurityViolationException tried to access file outside cache directory
@@ -293,8 +291,6 @@ class Finder
 
     /**
      * Method works like realpath(), but it always return paths with slashes (while builtin one uses backslashes on Windos).
-     *
-     * @param $path
      *
      * @return string unlike realpath() this method never returns false
      */
