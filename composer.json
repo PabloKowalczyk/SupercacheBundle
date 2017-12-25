@@ -45,7 +45,7 @@
         "post-update-cmd": ["@composer bin all update --ansi -o"],
         "supercache:checks": [
             "vendor/bin/php-cs-fixer fix -v --diff --dry-run --ansi",
-            "vendor/bin/phpstan analyse -l 4 --no-progress --ansi -c phpstan.neon src tests"
+            "vendor/bin/phpstan analyse -l 5 --no-progress --ansi -c phpstan.neon src tests"
         ]
     },
     "autoload": {

@@ -14,7 +14,9 @@ class FinderTest extends TestCase
 {
     public function testUnableToPassEmptyCacheDir()
     {
+        /** @var Filesystem|\PHPUnit_Framework_MockObject_MockObject $mockFilesystem */
         $mockFilesystem = $this->createMock(Filesystem::class);
+        /** @var HtmlMin|\PHPUnit_Framework_MockObject_MockObject $mockHtmlMin */
         $mockHtmlMin = $this->createMock(HtmlMin::class);
 
         $this->expectException(EmptyPathException::class);

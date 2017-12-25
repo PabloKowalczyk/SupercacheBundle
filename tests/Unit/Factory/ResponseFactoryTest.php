@@ -19,6 +19,7 @@ class ResponseFactoryTest extends TestCase
         string $cacheElementType,
         string $expectedMimeType
     ) {
+        /** @var CacheElement|\PHPUnit_Framework_MockObject_MockObject $mockCacheElement */
         $mockCacheElement = $this->createMock(CacheElement::class);
         $mockCacheElement
             ->method('getType')

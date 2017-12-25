@@ -49,22 +49,26 @@ class ResponseHandler
         $isCacheable = $this->isCacheable($request, $response);
 
         if (true !== $isCacheable) {
+            $reasonCode = (int) $isCacheable;
+
             if ($this->addStatusHeader) {
                 $response->headers
                     ->set(
                         'X-Supercache',
-                        'uncacheable,' . CacheManager::getUncachableReasonFromCode($isCacheable)
+                        'uncacheable,' . CacheManager::getUncachableReasonFromCode($reasonCode)
                     );
             }
 
             return false;
         }
 
+        $contentType = $response->headers
+            ->get('Content-Type', 'application/octet-stream');
+
         $status = $this->cachePush(
             $request->getPathInfo(),
             $response->getContent(),
-            $response->headers
-                ->get('Content-Type', 'application/octet-stream')
+            (string) $contentType
         );
 
         if ($this->addStatusHeader) {
