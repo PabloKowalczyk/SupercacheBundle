@@ -6,7 +6,7 @@ namespace PabloK\SupercacheBundle\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class SupercacheTest extends WebTestCase
@@ -16,7 +16,7 @@ class SupercacheTest extends WebTestCase
      */
     private $supercacheCacheDirectory;
     /**
-     * @var Container
+     * @var ContainerInterface
      */
     private $container;
     /**
