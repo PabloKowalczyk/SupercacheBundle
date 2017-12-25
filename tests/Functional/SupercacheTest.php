@@ -87,6 +87,7 @@ class SupercacheTest extends WebTestCase
         $this->client
             ->request('GET', '');
 
+        /** @var Response $response */
         $response = $this->client
             ->getResponse();
 

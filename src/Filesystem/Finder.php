@@ -26,7 +26,7 @@ class Finder
     private $cacheDir;
 
     /**
-     * @var LoggerInterface
+     * @var LoggerInterface|null
      */
     private $logger;
     /**
