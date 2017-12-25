@@ -42,7 +42,11 @@
     },
     "scripts": {
         "post-install-cmd": ["@composer bin all install --ansi -o"],
-        "post-update-cmd": ["@composer bin all update --ansi -o"]
+        "post-update-cmd": ["@composer bin all update --ansi -o"],
+        "supercache:checks": [
+            "vendor/bin/php-cs-fixer fix -v --diff --dry-run --ansi",
+            "vendor/bin/phpstan analyse -l 1 --no-progress --ansi -c phpstan.neon src tests"
+        ]
     },
     "autoload": {
         "psr-4": {
