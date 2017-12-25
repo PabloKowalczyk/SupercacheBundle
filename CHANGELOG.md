@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Introduce `PHPStan`
+- Added `SHELL_VERBOSITY` env to `phpunit.xml` to hide output from default logger
 
 ### Changed
 - `PHPCSFixer` moved to `vendor-bin`
