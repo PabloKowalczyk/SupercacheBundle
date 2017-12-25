@@ -28,7 +28,7 @@ build/*
 composer.phar
 vendor/*
 vendor-bin/*/vendor/
-composer.lock
+/composer.lock
 
 # Vagrant
 ubuntu-*-console.log

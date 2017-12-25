@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `PHPCSFixer` moved to `vendor-bin`
 - `PHPCSFixer` check added to CI
 - Allow `fast_finish` on TravisCI build
+- Ignore only main `composer.lock` file and allow `vendor-bin` packages to use `composer.lock` file 
 
 ## [0.3.1] - 2017-12-21
 ### Added
