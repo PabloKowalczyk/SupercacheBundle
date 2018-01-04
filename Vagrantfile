@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
     config.vm.network "private_network", ip: "192.168.56.26"
 
     config.vm.provider "virtualbox" do |vb|
-        vb.memory = "768"
+        vb.memory = "1024"
         vb.cpus = 4
         vb.name = "supercache-bundle"
     end
