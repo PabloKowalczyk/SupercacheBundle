@@ -16,8 +16,15 @@ class ClearCommandTest extends KernelTestCase
 
         $container = self::$kernel->getContainer();
 
+        $commandId = 'console.command.pablok_supercachebundle_command_clearcommand';
+
+        if (!$container->has($commandId)) {
+            // Symfony 4.0.3+ format
+            $commandId = 'console.command.public_alias.supercache.command.clear_command';
+        }
+
         /** @var ClearCommand $command */
-        $command = $container->get('console.command.pablok_supercachebundle_command_clearcommand');
+        $command = $container->get($commandId);
 
         $commandTester = new CommandTester($command);
 

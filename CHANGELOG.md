@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.4.0] - 2018-01-06
 ### Changed
 - Bumped `voku/html-min` to `^3.0.1` version to avoid conflicts with `symfony/polyfill`
+- Fixed `symfony 4.0.3+` commands' "public alias" change   
 
 ## [0.3.2] - 2017-12-25
 ### Added
