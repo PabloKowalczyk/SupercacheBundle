@@ -24,7 +24,7 @@ env:
         - DEPENDENCIES="high"
         - DEPENDENCIES="low"
     global:
-        - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-progress --no-suggest --prefer-dist"
+        - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-progress --no-suggest --prefer-dist --no-scripts"
 
 before_install:
     - composer self-update
@@ -32,6 +32,7 @@ before_install:
 install:
     - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS; fi
     - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest; fi
+    - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then travis_retry composer bin all install -o; fi
 
 script:
     - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then vendor/bin/php-cs-fixer fix -v --diff --dry-run; fi
