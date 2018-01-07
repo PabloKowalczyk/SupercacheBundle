@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - In CI install `vendor-bin` dependencies only when they are needed
 
 ## [0.4.0] - 2018-01-06
+### Added
+- Added `symfony/debug` dependency, as "suggest" section says, "for tracking deprecated interfaces usages at runtime with DebugClassLoader"
+
 ### Changed
 - Bumped `voku/html-min` to `^3.0.1` version to avoid conflicts with `symfony/polyfill`
 - Fixed `symfony 4.0.3+` commands' "public alias" change   
