@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added `symfony/debug` dependency, as "suggest" section says, "for tracking deprecated interfaces usages at runtime with DebugClassLoader"
 - Added sorting `composer.json` dependencies
 - Added `dist` as a preferred install method 
+- Added `Symfony\Bridge\PhpUnit\SymfonyTestsListener` to `phpunit.xml.dist` listeners
 
 ### Changed
 - Bumped `voku/html-min` to `^3.0.1` version to avoid conflicts with `symfony/polyfill`
