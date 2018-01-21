@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - In CI install `vendor-bin` dependencies only when they are needed
 - Disabled `XDebug` by default in CI
+- Only active `symfony` versions will be supported - added `2.7`, but dropped `3.0` and `3.1`
 
 ## [0.4.0] - 2018-01-06
 ### Added
