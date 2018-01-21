@@ -49,8 +49,7 @@ install:
 
 script:
     - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then
-        vendor/bin/php-cs-fixer fix -v --diff --dry-run;
-        vendor/bin/phpstan analyse -l 7 --no-progress -c phpstan.neon src tests;
+        composer supercache:checks
 
         xdebug-enable;
         vendor/bin/phpunit --coverage-clover=coverage-clover.xml;
