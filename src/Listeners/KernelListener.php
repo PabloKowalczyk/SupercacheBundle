@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PabloK\SupercacheBundle\Listeners;
 
-use PabloK\SupercacheBundle\Cache\RequestHandler;
 use PabloK\SupercacheBundle\Cache\ResponseHandler;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
@@ -15,7 +14,7 @@ class KernelListener
      */
     private $responseHandler;
 
-    public function __construct(RequestHandler $requestHandler, ResponseHandler $responseHandler)
+    public function __construct(ResponseHandler $responseHandler)
     {
         $this->responseHandler = $responseHandler;
     }

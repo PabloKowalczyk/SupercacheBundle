@@ -17,6 +17,7 @@ class HandlerTest extends TestCase
     /** @test */
     public function doNothingOnEmptyCachedResponse(): void
     {
+        /** @var RequestHandler|\PHPUnit_Framework_MockObject_MockObject $mockRequestHandler */
         $mockRequestHandler = $this->createMock(RequestHandler::class);
         $mockGetResponseEvent = $this->createMock(GetResponseEvent::class);
 
@@ -36,8 +37,10 @@ class HandlerTest extends TestCase
     /** @test */
     public function setResponseWhenResponseFoundInCache(): void
     {
+        /** @var RequestHandler|\PHPUnit_Framework_MockObject_MockObject $mockRequestHandler */
         $mockRequestHandler = $this->createMock(RequestHandler::class);
         $mockGetResponseEvent = $this->createMock(GetResponseEvent::class);
+        /** @var Request|\PHPUnit_Framework_MockObject_MockObject $mockRequest */
         $mockRequest = $this->createMock(Request::class);
 
         $mockRequest->attributes = new ParameterBag();

@@ -23,7 +23,6 @@
         </service>
 
         <service id="supercache.listeners.kernel_listener" class="PabloK\SupercacheBundle\Listeners\KernelListener">
-            <argument type="service" id="supercache.cache.request_handler" />
             <argument type="service" id="supercache.cache.response_handler" />
 
             <tag name="kernel.event_listener" event="kernel.response" method="onResponse" priority="-2147483647" />
