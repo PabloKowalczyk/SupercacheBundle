@@ -53,7 +53,7 @@ script:
 
         xdebug-enable;
         vendor/bin/phpunit --coverage-clover=coverage-clover.xml;
-        vendor/bin/infection --threads=4 --min-msi=62 --min-covered-msi=62
+        vendor/bin/infection --threads=4 --min-msi=62 --min-covered-msi=62;
         xdebug-disable;
       else
         vendor/bin/phpunit;
