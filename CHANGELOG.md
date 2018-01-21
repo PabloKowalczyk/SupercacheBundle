@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Added `churn-php`
+- CodeClimate integration
 
 ### Changed
 - In CI install `vendor-bin` dependencies only when they are needed

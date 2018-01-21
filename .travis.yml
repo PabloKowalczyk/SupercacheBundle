@@ -9,6 +9,11 @@ cache:
     directories:
         - $HOME/.composer/cache
 
+addons:
+    code_climate:
+        repo_token:
+            secure: "YN/z63RQ7yN3Yl4TYSjvNip7FGRq7pvAf8E6r6Rt3msRTFD3sZsxrMNPFQ3d1FveF3rAY0fRHIh19Jz3vsyp0+IQrNxt10tp6LNqhmc2mNqHSC0onxGFShNxvQqndMzV1g7LmmmG8vxd2g3fw20W4SLObNQed7XP7k/9fTXuwl23OrwxTu3/C7GqVZ5qfEjUKq1ikJnZhbXRJ1Ih92t5lLL/pHvDsibe9YsBep3gS/KdIc8l0IynMCnRgzK1JcYE4TbxecxEhZUIGkK/U5vbkJI/W3DuOk8HZkPA/N7jjgcisH1hpvopQqARs0Jmj2CcGD83L6c43usSxuFkjPbdmejuQE72KmJazmuQe8YMAIq8jUMupGnbIiT27U8pyJqQ25EqWnQCzBRTz3nOt0aAwFU8DlsMxfs7TheAFtc+hUUKBMFx12UgaZJrXG6c8BdCMjvNz4vdrndVRepJDdjuczqQz8VC/v6dsF7MTrHLaJRVOC04g7GgyCpqrJ9oec2LtNyvkSDub9g/FXHhCh9feV73orhe2aQF1elu8Mz7hX2UfRU0K1qRDpwLD9ZGQ0Nn1wdHzAFelrKHthP+7sFn+fdCJd3PJyHUd5rHgdf/YFa1xgukM8VFG0o4zX4UhBE5AqvN2Vn5SPOfybLw99bIdQdUxrbFvoFYU1E1Gjt8K2w="
+
 php:
     - '7.1'
     - '7.2'
@@ -46,8 +51,15 @@ script:
     - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then
         vendor/bin/php-cs-fixer fix -v --diff --dry-run;
         vendor/bin/phpstan analyse -l 7 --no-progress -c phpstan.neon src tests;
+
+        xdebug-enable;
+        vendor/bin/phpunit --coverage-clover=coverage-clover.xml;
+        xdebug-disable;
+
+        vendor/bin/test-reporter --coverage-report=coverage-clover.xml;
+      else
+        vendor/bin/phpunit
       fi
-    - vendor/bin/phpunit
 
 notifications:
     email: false
