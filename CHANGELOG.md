@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Disabled `XDebug` by default in CI
 - Only active `symfony` versions will be supported - added `2.7`, but dropped `3.0` and `3.1`
 - Minimum `PHP` is `7.1.3`
+- Moved handling request logic to dedicated class `PabloK\SupercacheBundle\Request\Handler` 
 
 ## [0.4.0] - 2018-01-06
 ### Added
