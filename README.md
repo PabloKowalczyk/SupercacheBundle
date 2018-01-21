@@ -2,6 +2,9 @@
 This bundle is a fork of [SupercacheBundle](https://github.com/kiler129/SupercacheBundle) which 
 looks like [abandoned](https://github.com/kiler129/SupercacheBundle/issues/16).
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/b31680710f69341d642f/maintainability)](https://codeclimate.com/github/PabloKowalczyk/SupercacheBundle/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b31680710f69341d642f/test_coverage)](https://codeclimate.com/github/PabloKowalczyk/SupercacheBundle/test_coverage)
+
 |Branch|Build status|
 |---|---|
 |master|[![Build Status](https://travis-ci.org/PabloKowalczyk/SupercacheBundle.svg?branch=master)](https://travis-ci.org/PabloKowalczyk/SupercacheBundle)|
