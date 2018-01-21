@@ -32,13 +32,23 @@ before_install:
     - composer self-update
 
 install:
-    - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS; fi
-    - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest; fi
-    - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then travis_retry composer bin all install -o; fi
+    - if [[ "$DEPENDENCIES" = 'high' ]]; then
+        travis_retry composer update $DEFAULT_COMPOSER_FLAGS;
+      fi
+    - if [[ "$DEPENDENCIES" = 'low' ]]; then
+        travis_retry composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest;
+      fi
+    - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then
+        travis_retry composer bin all install -o;
+      fi
 
 script:
-    - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then vendor/bin/php-cs-fixer fix -v --diff --dry-run; fi
-    - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then vendor/bin/phpstan analyse -l 7 --no-progress -c phpstan.neon src tests; fi
+    - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then
+        vendor/bin/php-cs-fixer fix -v --diff --dry-run;
+      fi
+    - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then
+        vendor/bin/phpstan analyse -l 7 --no-progress -c phpstan.neon src tests;
+      fi
     - vendor/bin/phpunit
 
 notifications:
