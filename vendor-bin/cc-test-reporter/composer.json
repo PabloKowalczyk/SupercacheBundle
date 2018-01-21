@@ -1,0 +1,5 @@
+{
+    "require": {
+        "codeclimate/php-test-reporter": "^0.4.4"
+    }
+}
