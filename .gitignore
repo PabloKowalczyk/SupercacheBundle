@@ -36,3 +36,6 @@ ubuntu-*-console.log
 
 # PHP CS Fixer
 .php_cs.cache
+
+# Infection
+infection-log.txt
