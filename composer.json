@@ -15,6 +15,11 @@
             "name": "Grzegorz Zdanowski",
             "email": "grzegorz@noflash.pl",
             "role": "Developer"
+        },
+        {
+            "name": "PabloKowalczyk",
+            "homepage": "https://github.com/PabloKowalczyk",
+            "role": "Developer"
         }
     ],
     "require": {
