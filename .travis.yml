@@ -27,6 +27,8 @@ env:
         - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-progress --no-suggest --prefer-dist --no-scripts"
 
 before_install:
+    - source .travis/xdebug.sh
+    - xdebug-disable
     - composer self-update
 
 install:
