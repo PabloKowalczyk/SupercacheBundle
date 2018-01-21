@@ -3,7 +3,7 @@
 
 $phpVersion = "7.1";
 $binDir = "/home/ubuntu/bin";
-$composerVersion = "1.6.1";
+$composerVersion = "1.6.2";
 $composerFile = $binDir + "/composer";
 
 Vagrant.configure("2") do |config|
