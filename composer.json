@@ -54,6 +54,9 @@
             "@composer validate --strict",
             "@php vendor/bin/php-cs-fixer fix -v --diff --dry-run --ansi",
             "@php vendor/bin/phpstan analyse -l 7 --no-progress --ansi -c phpstan.neon src tests"
+        ],
+        "supercache:test:infection": [
+            "@php vendor/bin/infection --threads=4 --min-msi=62 --min-covered-msi=62"
         ]
     },
     "config": {
