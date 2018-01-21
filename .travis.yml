@@ -53,10 +53,14 @@ script:
 
         xdebug-enable;
         vendor/bin/phpunit --coverage-clover=coverage-clover.xml;
-        vendor/bin/infection --threads=4 --min-msi=62 --min-covered-msi=62;
         xdebug-disable;
       else
         vendor/bin/phpunit;
+      fi
+    - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.1' ]]; then
+        xdebug-enable;
+        composer supercache:test:infection;
+        xdebug-disable;
       fi
 
 after_script:
