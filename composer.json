@@ -57,6 +57,11 @@
         ],
         "supercache:test:infection": [
             "@php vendor/bin/infection --threads=4 --min-msi=62 --min-covered-msi=62"
+        ],
+        "supercache:tests": [
+            "@supercache:checks",
+            "@php vendor/bin/phpunit",
+            "@supercache:test:infection"
         ]
     },
     "config": {
