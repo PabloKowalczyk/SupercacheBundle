@@ -55,10 +55,13 @@ script:
         xdebug-enable;
         vendor/bin/phpunit --coverage-clover=coverage-clover.xml;
         xdebug-disable;
-
-        vendor/bin/test-reporter --coverage-report=coverage-clover.xml;
       else
-        vendor/bin/phpunit
+        vendor/bin/phpunit;
+      fi
+
+after_script:
+    - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then
+        vendor/bin/test-reporter --coverage-report=coverage-clover.xml;
       fi
 
 notifications:
