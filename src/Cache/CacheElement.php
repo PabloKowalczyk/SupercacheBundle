@@ -100,16 +100,6 @@ class CacheElement
     }
 
     /**
-     * Sets cached element path without url decoding.
-     *
-     * @param string $path Cache path, eg. /sandbox
-     */
-    private function setRawPath(string $path)
-    {
-        $this->path = $path;
-    }
-
-    /**
      * Sets element type.
      *
      * @param string $type Any valid type defined by self::TYPE_* constants

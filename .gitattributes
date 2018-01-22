@@ -12,3 +12,4 @@
 /.php_cs.dist export-ignore
 /phpstan.neon export-ignore
 /.travis export-ignore
+/phpmd-ruleset.xml export-ignore
