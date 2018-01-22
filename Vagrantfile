@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 $phpVersion = "7.1";
-$binDir = "/home/ubuntu/bin";
+$binDir = "/home/vagrant/bin";
 $composerVersion = "1.6.2";
 $composerFile = $binDir + "/composer";
 
