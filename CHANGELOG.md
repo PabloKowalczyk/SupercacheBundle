@@ -8,7 +8,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Added `churn-php`
 - CodeClimate integration
-- `infection/infection` to CI
 - `PHPMessDetector` to CI
 
 ### Changed

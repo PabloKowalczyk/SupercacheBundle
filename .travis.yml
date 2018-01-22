@@ -46,9 +46,6 @@ install:
     - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then
         travis_retry composer bin all install -a --no-dev;
       fi
-    - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.1' ]]; then
-        travis_retry composer bin infection install -a --no-dev;
-      fi
 
 script:
     - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.2' ]]; then
@@ -59,11 +56,6 @@ script:
         xdebug-disable;
       else
         vendor/bin/phpunit;
-      fi
-    - if [[ "$DEPENDENCIES" = 'high' ]] && [[ "$TRAVIS_PHP_VERSION" = '7.1' ]]; then
-        xdebug-enable;
-        composer supercache:test:infection;
-        xdebug-disable;
       fi
 
 after_script:
