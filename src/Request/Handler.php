@@ -8,6 +8,9 @@ use PabloK\SupercacheBundle\Cache\RequestHandler;
 use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
+/**
+ * @internal
+ */
 final class Handler
 {
     /**
