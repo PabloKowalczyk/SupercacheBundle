@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added `churn-php`
 - CodeClimate integration
 - `PHPMessDetector` to CI
+- `PHP-Paraller-linter` to CI 
 
 ### Changed
 - In CI install `vendor-bin` dependencies only when they are needed
