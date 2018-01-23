@@ -6,6 +6,7 @@ namespace PabloK\SupercacheBundle\Request;
 
 use PabloK\SupercacheBundle\Cache\RequestHandler;
 use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
+use PabloK\SupercacheBundle\Response\Handler as ResponseHandler;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
@@ -35,7 +36,7 @@ final class Handler
 
         if (null !== $cacheResponse) {
             $request->attributes
-                ->set('response_source', 'cache');
+                ->set(ResponseHandler::RESPONSE_SOURCE_ATTR_NAME, ResponseHandler::RESPONSE_SOURCE_CACHE);
 
             $getResponseEvent->setResponse($cacheResponse);
         }

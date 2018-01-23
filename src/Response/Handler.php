@@ -12,6 +12,9 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
  */
 final class Handler
 {
+    public const RESPONSE_SOURCE_ATTR_NAME = 'response_source';
+    public const RESPONSE_SOURCE_CACHE = 'cache';
+
     /**
      * @var ResponseHandler
      */
@@ -26,9 +29,9 @@ final class Handler
     {
         $request = $event->getRequest();
         $responseSource = $request->attributes
-            ->get('response_source');
+            ->get(self::RESPONSE_SOURCE_ATTR_NAME);
 
-        if ('cache' === $responseSource) { //Prevents re-caching response from cache
+        if (self::RESPONSE_SOURCE_CACHE === $responseSource) { //Prevents re-caching response from cache
             $event->stopPropagation();
 
             return;
