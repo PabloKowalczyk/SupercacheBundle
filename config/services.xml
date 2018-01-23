@@ -22,10 +22,10 @@
             <tag name="kernel.event_listener" event="kernel.request" method="__invoke" priority="2147483647" />
         </service>
 
-        <service id="supercache.listeners.kernel_listener" class="PabloK\SupercacheBundle\Listeners\KernelListener">
+        <service id="supercache.response.handler" class="PabloK\SupercacheBundle\Response\Handler" public="true">
             <argument type="service" id="supercache.cache.response_handler" />
 
-            <tag name="kernel.event_listener" event="kernel.response" method="onResponse" priority="-2147483647" />
+            <tag name="kernel.event_listener" event="kernel.response" method="__invoke" priority="-2147483647" />
         </service>
 
         <service id="supercache.cache.request_handler" class="PabloK\SupercacheBundle\Cache\RequestHandler">

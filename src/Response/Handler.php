@@ -2,12 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PabloK\SupercacheBundle\Listeners;
+namespace PabloK\SupercacheBundle\Response;
 
 use PabloK\SupercacheBundle\Cache\ResponseHandler;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class KernelListener
+/**
+ * @internal
+ */
+final class Handler
 {
     /**
      * @var ResponseHandler
@@ -19,14 +22,7 @@ class KernelListener
         $this->responseHandler = $responseHandler;
     }
 
-    /**
-     * This method is executed on kernel.response event.
-     *
-     * @param FilterResponseEvent $event
-     *
-     * @see {http://symfony.com/doc/current/components/http_kernel/introduction.html#the-kernel-response-event}
-     */
-    public function onResponse(FilterResponseEvent $event)
+    public function __invoke(FilterResponseEvent $event): void
     {
         $request = $event->getRequest();
         $responseSource = $request->attributes
