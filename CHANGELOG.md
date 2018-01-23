@@ -16,7 +16,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Disabled `XDebug` by default in CI
 - Only active `symfony` versions will be supported - added `2.7`, but dropped `3.0` and `3.1`
 - Minimum `PHP` is `7.1.3`
-- Moved handling request logic to dedicated class `PabloK\SupercacheBundle\Request\Handler` 
+- Moved handling request logic to dedicated class `PabloK\SupercacheBundle\Request\Handler`
+- Request/Response Handlers marked as `@internal`
+
+### Removed
+- `KernelListener` class - if you use this class then it is a BC break, but that class was meant for internal use only
 
 ## [0.4.0] - 2018-01-06
 ### Added
