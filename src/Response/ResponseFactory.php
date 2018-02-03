@@ -8,7 +8,10 @@ use PabloK\SupercacheBundle\Cache\CacheElement;
 use PabloK\SupercacheBundle\Cache\CacheType;
 use Symfony\Component\HttpFoundation\Response;
 
-class ResponseFactory
+/**
+ * @internal
+ */
+final class ResponseFactory
 {
     const MIME_TYPE_MAP = [
         CacheType::TYPE_HTML => 'text/html',
