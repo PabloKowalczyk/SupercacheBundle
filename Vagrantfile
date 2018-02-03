@@ -12,6 +12,11 @@ Vagrant.configure("2") do |config|
     config.vm.network "forwarded_port", guest: 8000, host: 8001
     config.vm.network "private_network", ip: "192.168.56.26"
 
+    config.vm.synced_folder ".", "/vagrant",
+        mount_options: ["actimeo=1"],
+        nfs: true,
+        linux__nfs_options: ["rw", "no_subtree_check", "all_squash", "async"]
+
     config.vm.provider "virtualbox" do |vb|
         vb.memory = "1536"
         vb.cpus = 4
