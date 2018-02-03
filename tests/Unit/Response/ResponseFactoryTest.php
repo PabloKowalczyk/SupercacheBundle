@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PabloK\SupercacheBundle\Tests\Unit\Factory;
+namespace PabloK\SupercacheBundle\Tests\Unit\Response;
 
 use PabloK\SupercacheBundle\Cache\CacheElement;
 use PabloK\SupercacheBundle\Cache\CacheType;
-use PabloK\SupercacheBundle\Factory\ResponseFactory;
+use PabloK\SupercacheBundle\Response\ResponseFactory;
 use PHPUnit\Framework\TestCase;
 
 class ResponseFactoryTest extends TestCase

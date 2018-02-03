@@ -30,7 +30,7 @@
 
         <service id="supercache.cache.request_handler" class="PabloK\SupercacheBundle\Cache\RequestHandler">
             <argument type="service" id="supercache.cache.cache_manager" />
-            <argument type="service" id="supercache.factory.response_factory" />
+            <argument type="service" id="supercache.response.response_factory" />
             <argument type="string">%supercache.cache_status_header%</argument>
         </service>
 
@@ -50,8 +50,8 @@
             <tag name="console.command" />
         </service>
 
-        <service id="supercache.factory.response_factory"
-                 class="PabloK\SupercacheBundle\Factory\ResponseFactory"
+        <service id="supercache.response.response_factory"
+                 class="PabloK\SupercacheBundle\Response\ResponseFactory"
                  public="false"
         />
 

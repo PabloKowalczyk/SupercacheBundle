@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PabloK\SupercacheBundle\Factory;
+namespace PabloK\SupercacheBundle\Response;
 
 use PabloK\SupercacheBundle\Cache\CacheElement;
 use PabloK\SupercacheBundle\Cache\CacheType;

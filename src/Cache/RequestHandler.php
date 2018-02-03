@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PabloK\SupercacheBundle\Cache;
 
 use PabloK\SupercacheBundle\Exceptions\SecurityViolationException;
-use PabloK\SupercacheBundle\Factory\ResponseFactory;
+use PabloK\SupercacheBundle\Response\ResponseFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
