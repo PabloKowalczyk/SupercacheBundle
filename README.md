@@ -8,7 +8,7 @@ looks like [abandoned](https://github.com/kiler129/SupercacheBundle/issues/16).
 |Branch|Build status|
 |---|---|
 |master|[![Build Status](https://travis-ci.org/PabloKowalczyk/SupercacheBundle.svg?branch=master)](https://travis-ci.org/PabloKowalczyk/SupercacheBundle)|
-|latest stable (0.4.0)|[![Build Status](https://travis-ci.org/PabloKowalczyk/SupercacheBundle.svg?branch=0.4.0)](https://travis-ci.org/PabloKowalczyk/SupercacheBundle)|
+|latest stable (0.5.0)|[![Build Status](https://travis-ci.org/PabloKowalczyk/SupercacheBundle.svg?branch=0.5.0)](https://travis-ci.org/PabloKowalczyk/SupercacheBundle)|
 
 # Supercache Bundle
 Static pages caching for Symfony Framework.
