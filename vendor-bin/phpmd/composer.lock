@@ -163,16 +163,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v4.0.4",
+            "version": "v4.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "ecd917899167922086ddb3247aa43eb1c418fcb2"
+                "reference": "289eadd3771f7682ea2540e4925861c18ec5b4d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/ecd917899167922086ddb3247aa43eb1c418fcb2",
-                "reference": "ecd917899167922086ddb3247aa43eb1c418fcb2",
+                "url": "https://api.github.com/repos/symfony/config/zipball/289eadd3771f7682ea2540e4925861c18ec5b4d0",
+                "reference": "289eadd3771f7682ea2540e4925861c18ec5b4d0",
                 "shasum": ""
             },
             "require": {
@@ -183,6 +183,8 @@
                 "symfony/finder": "<3.4"
             },
             "require-dev": {
+                "symfony/dependency-injection": "~3.4|~4.0",
+                "symfony/event-dispatcher": "~3.4|~4.0",
                 "symfony/finder": "~3.4|~4.0",
                 "symfony/yaml": "~3.4|~4.0"
             },
@@ -219,20 +221,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-21T19:06:11+00:00"
+            "time": "2018-02-04T16:43:51+00:00"
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v4.0.4",
+            "version": "v4.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "f78ca49c6360c710ca8e316511e71a23b10e3bf2"
+                "reference": "93ad14f124beacf16894b64bb5b3cdd5b4367e38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/f78ca49c6360c710ca8e316511e71a23b10e3bf2",
-                "reference": "f78ca49c6360c710ca8e316511e71a23b10e3bf2",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/93ad14f124beacf16894b64bb5b3cdd5b4367e38",
+                "reference": "93ad14f124beacf16894b64bb5b3cdd5b4367e38",
                 "shasum": ""
             },
             "require": {
@@ -290,20 +292,20 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-29T09:29:16+00:00"
+            "time": "2018-03-05T18:28:26+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.0.4",
+            "version": "v4.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "760e47a4ee64b4c48f4b30017011e09d4c0f05ed"
+                "reference": "5d2d655b2c72fc4d9bf7e9bf14f72a447b940f21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/760e47a4ee64b4c48f4b30017011e09d4c0f05ed",
-                "reference": "760e47a4ee64b4c48f4b30017011e09d4c0f05ed",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/5d2d655b2c72fc4d9bf7e9bf14f72a447b940f21",
+                "reference": "5d2d655b2c72fc4d9bf7e9bf14f72a447b940f21",
                 "shasum": ""
             },
             "require": {
@@ -339,7 +341,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:38:00+00:00"
+            "time": "2018-02-22T10:50:29+00:00"
         }
     ],
     "packages-dev": [],
