@@ -14,8 +14,3 @@ supercache:
     enabled: true
     cache_dir: "%kernel.cache_dir%/test-supercache"
     cache_status_header: true
-
-services:
-    index_controller:
-        class: PabloK\SupercacheBundle\Tests\TestEnvironment\TestController
-        public: true
