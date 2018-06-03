@@ -16,10 +16,6 @@ class SupercacheTest extends WebTestCase
      */
     private $supercacheCacheDirectory;
     /**
-     * @var ContainerInterface
-     */
-    private $container;
-    /**
      * @var Client
      */
     private $client;
@@ -27,9 +23,9 @@ class SupercacheTest extends WebTestCase
     public function setUp()
     {
         $this->client = static::createClient();
-        $this->container = static::$kernel->getContainer();
-        $this->supercacheCacheDirectory = $this->container
-            ->getParameter('supercache.cache_dir');
+        /** @var ContainerInterface $container */
+        $container = static::$kernel->getContainer();
+        $this->supercacheCacheDirectory = $container->getParameter('supercache.cache_dir');
     }
 
     protected function tearDown()
