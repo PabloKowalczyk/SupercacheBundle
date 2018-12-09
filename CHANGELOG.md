@@ -6,7 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.0] - 2018-12-09
+
+### Fixed
+
+- [[#4]] Fix Symfony's 4.2 deprecations 
+
 ## [0.5.0] - 2018-03-30
+
 ### Added
 - Added `churn-php`
 - CodeClimate integration
@@ -86,3 +93,5 @@ from `PabloK\SupercacheBundle\Cache\CacheElement`
 - Changed Vagrant PHP OPcache folder to `/home/vagrant/tmp/php/opcache`
 - Cache Composer files in TravisCI builds
 - Added `.php_cs.dist` to files ignored on export
+
+[#4]: https://github.com/PabloKowalczyk/SupercacheBundle/pull/4
