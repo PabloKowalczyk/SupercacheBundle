@@ -1,5 +1,5 @@
 {
     "require-dev": {
-        "bmitch/churn-php": "^0.4.1"
+        "bmitch/churn-php": "^1.0"
     }
 }
