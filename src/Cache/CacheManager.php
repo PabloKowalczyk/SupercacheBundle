@@ -84,7 +84,7 @@ class CacheManager
      * @param null|string $parent Branch to start from. Eg. you can specify /sandbox and you'll get /sandbox,
      *                            /sandbox/info but not /test or /test/sandbox.
      *
-     * @return array[]
+     * @return array<int, string>
      */
     public function getEntriesList($parent = null)
     {
