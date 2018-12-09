@@ -296,7 +296,7 @@ class Finder
      */
     private function unixRealpath($path)
     {
-        return (DIRECTORY_SEPARATOR === '/') ? (string) \realpath($path) : \str_replace('\\', '/', \realpath($path));
+        return (\DIRECTORY_SEPARATOR === '/') ? (string) \realpath($path) : \str_replace('\\', '/', \realpath($path));
     }
 
     /**
