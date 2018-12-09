@@ -60,6 +60,9 @@
         "supercache:tests": [
             "@supercache:checks",
             "@php vendor/bin/phpunit"
+        ],
+        "supercache:fixes": [
+            "@php vendor/bin/php-cs-fixer fix --verbose --diff --ansi"
         ]
     },
     "config": {
