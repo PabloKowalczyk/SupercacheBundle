@@ -6,12 +6,13 @@ namespace PabloK\SupercacheBundle\Tests\Unit\Response;
 
 use PabloK\SupercacheBundle\Cache\ResponseHandler;
 use PabloK\SupercacheBundle\Response\Handler;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class HandlerTest extends \PHPUnit_Framework_TestCase
+class HandlerTest extends TestCase
 {
     /** @test */
     public function responseFromCacheWillStopPropagation(): void
