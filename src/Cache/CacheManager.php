@@ -73,7 +73,7 @@ class CacheManager
      */
     public function isExists($path)
     {
-        $filePath = $path . DIRECTORY_SEPARATOR . 'index.html';
+        $filePath = $path . \DIRECTORY_SEPARATOR . 'index.html';
 
         return $this->finder->isReadable($filePath);
     }
@@ -99,8 +99,8 @@ class CacheManager
 
             if ('' === $entry) {
                 $entry = '/';
-            } elseif (DIRECTORY_SEPARATOR !== '/') { //Why elseif and not if below? Simple - it's waste of time to call str_replace when $entry was empty before
-                $entry = \str_replace($entry, DIRECTORY_SEPARATOR, '/'); //Did I mention I hate Windos?
+            } elseif (\DIRECTORY_SEPARATOR !== '/') { //Why elseif and not if below? Simple - it's waste of time to call str_replace when $entry was empty before
+                $entry = \str_replace($entry, \DIRECTORY_SEPARATOR, '/'); //Did I mention I hate Windos?
             }
 
             if ($parent && 0 !== \strpos($entry, $parent)) {
@@ -125,11 +125,11 @@ class CacheManager
      */
     public function deleteEntry($path)
     {
-        if (DIRECTORY_SEPARATOR !== '/') { //Path will always have / (bcs it's http path), no matter on which OS
-            $path = \str_replace('/', DIRECTORY_SEPARATOR, $path); //...but filesystem differ
+        if (\DIRECTORY_SEPARATOR !== '/') { //Path will always have / (bcs it's http path), no matter on which OS
+            $path = \str_replace('/', \DIRECTORY_SEPARATOR, $path); //...but filesystem differ
         }
 
-        $filePath = $path . DIRECTORY_SEPARATOR . 'index.html'; //File path
+        $filePath = $path . \DIRECTORY_SEPARATOR . 'index.html'; //File path
 
         if (!$this->finder->isReadable($filePath)) {
             return false;
@@ -158,8 +158,8 @@ class CacheManager
      */
     public function deleteEntryRecursive($path)
     {
-        if (DIRECTORY_SEPARATOR !== '/') {
-            $path = \str_replace('/', DIRECTORY_SEPARATOR, $path);
+        if (\DIRECTORY_SEPARATOR !== '/') {
+            $path = \str_replace('/', \DIRECTORY_SEPARATOR, $path);
         }
 
         if (!$this->finder->isReadable($path)) {
