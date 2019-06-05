@@ -18,11 +18,11 @@ class SupercacheTest extends WebTestCase
     /**
      * @var Client
      */
-    private $client;
+    private $kernelBrowser;
 
     public function setUp()
     {
-        $this->client = static::createClient();
+        $this->kernelBrowser = static::createClient();
         /** @var ContainerInterface $container */
         $container = static::$kernel->getContainer();
         $this->supercacheCacheDirectory = $container->getParameter('supercache.cache_dir');
@@ -80,11 +80,11 @@ class SupercacheTest extends WebTestCase
 
     private function makeRequest(): Response
     {
-        $this->client
+        $this->kernelBrowser
             ->request('GET', '');
 
         /** @var Response $response */
-        $response = $this->client
+        $response = $this->kernelBrowser
             ->getResponse();
 
         return $response;
