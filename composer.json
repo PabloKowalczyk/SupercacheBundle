@@ -44,7 +44,7 @@
         "symfony/debug": "~2.8|~3.4|~4.1",
         "symfony/dom-crawler": "~2.8|~3.4|~4.1",
         "symfony/finder": "~2.8|~3.4|~4.1",
-        "symfony/phpunit-bridge": "^4.2",
+        "symfony/phpunit-bridge": "^4.3",
         "symfony/yaml": "~2.8|~3.4|~4.1"
     },
     "scripts": {
